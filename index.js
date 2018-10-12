@@ -7,6 +7,7 @@ let sentimentController = require('./controller/sentimentController.js')
 let departmentModel = require('./models/departmentModel.js')
 let complaintModel = require('./models/complaintModel.js')
 let trackModel = require('./models/trackModel.js')
+let userModel = require('./models/userModel.js')
 const bodyParser = require('body-parser');
 app.use(bodyParser());
 app.set('view engine', 'ejs');
@@ -26,6 +27,28 @@ app.post('/tracking', (req, res) => {
     trackModel.getTrack(req.body['track-id'])
     .then(status => res.render('trackDetails', {status}))
     .catch(err => res.send("Error: "+err))
+})
+
+app.get('/userlogin', (req, res) => {
+    res.render('userLogin');
+})
+
+app.post('/userlogin', (req, res) => {
+    userModel.authenticate(req.body['username'], req.body['password'])
+    .then(()=>{
+        res.render('home');
+    })
+})
+
+app.get('/register', (req, res) => {
+    res.render('register');
+})
+
+app.post('/register', (req, res) => {
+    userModel.insert(req.body, res)
+    .then(() => {
+        res.send("You have been successfully registered");
+    })
 })
 
 app.get('/department',(req,res) => {
