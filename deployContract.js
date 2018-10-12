@@ -43,7 +43,7 @@ var contractInstance;
 //The final parameter is a callback function. After the contract is deployed this function will be called with either an error or our contract instance
 
 var deployedContract = VotingContract.new(
-  ["Rama", "Nick", "Claudius", "Harsh"],
+  ["Elevator doesnot work", "Poor work environment", "Dark and clumsy corridors"],
   {
     data: byteCode,
     from: web3.eth.accounts[0],
@@ -75,23 +75,23 @@ var deployedContract = VotingContract.new(
         console.log(
           "\n------------ LOGGING Executing contract calls -------------\n"
         );
-        console.log("Votes for Rama before: ");
+        console.log("Votes for Elevator doesnot work before: ");
         //totalVotesFor() is a function in our contract
-        console.log(contractInstance.totalVotesFor.call("Rama").valueOf());
+        console.log(contractInstance.totalVotesFor.call(0).valueOf());
 
         //execute a transaction. The transaction id (output) is the proof that this transaction occurred and you can refer back to this at any time in the future. This transaction is immutable.
         console.log(
-          contractInstance.voteForCandidate("Rama", {
+          contractInstance.voteForCandidate(0, {
             from: web3.eth.accounts[0]
           })
         );
 
-        //votes for Rama should go up by 1
-        console.log("Votes for Rama after: ");
-        console.log(contractInstance.totalVotesFor.call("Rama").valueOf());
+        //votes for Elevator doesnot work should go up by 1
+        console.log("Votes for Elevator doesnot work after: ");
+        console.log(contractInstance.totalVotesFor.call(0).valueOf());
         //write the contract address and abi to file for client side JS to use to interact with contract
         fs.writeFile(
-          "./contract.json",
+          "./public/contract.json",
           JSON.stringify(
             {
               address: contract.address,
@@ -106,7 +106,7 @@ var deployedContract = VotingContract.new(
               console.log("ERROR: ");
               console.log(err);
             } else {
-              console.log(`The file ./contract.json was saved!`);
+              console.log(`The file .public/contract.json was saved!`);
             }
           }
         );

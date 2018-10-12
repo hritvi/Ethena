@@ -5,7 +5,7 @@ contract Voting {
   /* the mapping field below is equivalent to an associative array or hash.
   */
 
-  mapping (bytes32 => uint8) public votesReceived;
+  mapping (int => uint8) public votesReceived;
 
   /* Solidity doesn't let you pass in an array of strings in the constructor (yet).
   We will use an array of bytes32 instead to store the list of candidates
@@ -22,16 +22,16 @@ contract Voting {
   }
 
   // This function returns the total votes a candidate has received so far
-  function totalVotesFor(bytes32 candidate) returns (uint8) {
-    assert(validCandidate(candidate) == true);
-    return votesReceived[candidate];
+  function totalVotesFor(int id) returns (uint8) {
+    assert(int256(candidateList.length) > id);
+    return votesReceived[id];
   }
 
   // This function increments the vote count for the specified candidate. This
   // is equivalent to casting a vote
-  function voteForCandidate(bytes32 candidate) {
-    assert(validCandidate(candidate) == true);
-    votesReceived[candidate] += 1;
+  function voteForCandidate(int id) {
+    assert(int256(candidateList.length) > id);
+    votesReceived[id] += 1;
   }
 
   function validCandidate(bytes32 candidate) returns (bool) {
@@ -41,5 +41,20 @@ contract Voting {
       }
     }
     return false;
+  }
+
+  function addIssue(bytes32 candidate) {
+    // int length = candidateList.length + 1;
+    // bytes[] newCandidateList = new bytes[](length);
+    // for(uint i=0; i<newCandidateList.length; i++ ){
+    //   if(i == length-1){
+    //     newCandidateList[i] = candidate;
+    //   }
+    //   else{
+    //     newCandidateList[i] = candidateList[i];
+    //   }
+    // }
+    // candidateList = newCandidateList;
+    candidateList.push(candidate);
   }
 }
