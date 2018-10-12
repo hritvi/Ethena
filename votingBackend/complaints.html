@@ -1,0 +1,32 @@
+<html>
+<head>
+	<title>
+		complaints
+	</title>
+	<script>
+		function clickhandler() {
+			console.log('The app has started finally tada');
+			console.log("Finally the app has started");
+			const url = `http://localhost:5000/chain/`;
+			const options = {
+				method: 'GET',
+				mode: 'cors',
+			};
+			fetch(url, options)
+			.then(data => data.json())
+			.then(data => {
+				console.log(data)
+			}
+			.catch(error => {
+				console.log(error);
+			});
+		}
+	</script>
+</head>
+<body>
+	<div id="main-block">
+		<button onclick="clickhandler()"></button>
+		<p></p>
+	</div>
+</body>
+</html>
