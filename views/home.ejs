@@ -67,7 +67,7 @@
             <tbody>
                 <tr>
                     <td>Rama</td>
-                    <td id="candidate-1"></td>
+                    <td id="voted-1"></td>
                 </tr>
                 <tr>
                     <td>Nick</td>
@@ -85,12 +85,12 @@
         </table>
     </div>
     <input type="text" id="issue" />
-    <button class="btn btn-primary" onclick="voteForCandidate()" id="voting-button">Vote</button>
+    <button class="btn btn-primary" onclick="voteForCandidate(this.id)" id="upvote-1">Vote</button>
     
     
 </body>
 <script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js/dist/web3.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
 crossorigin="anonymous"></script>
-<script src="js/issue.js"></script>
+<script src="js/issueHandler.js"></script>
 </html>

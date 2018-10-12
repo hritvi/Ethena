@@ -77,18 +77,18 @@ var deployedContract = VotingContract.new(
         );
         console.log("Votes for Elevator doesnot work before: ");
         //totalVotesFor() is a function in our contract
-        console.log(contractInstance.totalVotesFor.call("Elevator doesnot work").valueOf());
+        console.log(contractInstance.totalVotesFor.call(0).valueOf());
 
         //execute a transaction. The transaction id (output) is the proof that this transaction occurred and you can refer back to this at any time in the future. This transaction is immutable.
         console.log(
-          contractInstance.voteForCandidate("Elevator doesnot work", {
+          contractInstance.voteForCandidate(0, {
             from: web3.eth.accounts[0]
           })
         );
 
         //votes for Elevator doesnot work should go up by 1
         console.log("Votes for Elevator doesnot work after: ");
-        console.log(contractInstance.totalVotesFor.call("Elevator doesnot work").valueOf());
+        console.log(contractInstance.totalVotesFor.call(0).valueOf());
         //write the contract address and abi to file for client side JS to use to interact with contract
         fs.writeFile(
           "./public/contract.json",
