@@ -4,12 +4,9 @@
 			Departmental Complaints
 		</title>
 		<style>
-			.table {
-				
-			}
-
-			#head {
-
+			table, th, td {
+				padding: 15px;
+				border: 4px;
 			}
 		</style>
 	</head>
@@ -20,11 +17,11 @@
 				
 			<table class="table">
 				<tr class='complaint-row' id='head'>
-					<td>Title</td>
-					<td>Content</td>
-					<td>Plantiff</td>
-					<td>Date</td>
+					<td>Complain</td>
+					<td>Pincode</td>
+					<td>Address</td>
 					<td>Urgency</td>
+					<td>Status</td>
 				</tr>
 				<% for (var i=0; i < data.length; i++) { %>
 				   <tr class = 'complaint-row'>
@@ -33,10 +30,22 @@
 				     <td><%= data[i].plaintiff_city %></td>
 				     <td><%= data[i].urgency %></td>
 		             <td><form action='/department' method="POST">
-		                <hr/>
-				        Finished : <input type="radio" name="status" value="finish" id="finish">
-						On Process : <input type="radio" name="status" value="process" id="process">
-						Not Started : <input type="radio" name="status" value="notstarted" id="notstarted">
+						<hr/>
+						Finished :<% if (data[i]["complaint_status"] == "finish") { %>						
+							<input style="margin-left:0px;margin-right:10px;" type="radio" name="status" value="finish" id="finish" checked>
+						<% } else { %>
+							<input style="margin-left:0px;margin-right:10px;" type="radio" name="status" value="finish" id="finish">
+						<% } %>
+						On Process : <% if (data[i]["complaint_status"] == "process") { %>						
+							<input style="margin-left:0px;margin-right:10px;" type="radio" name="status" value="process" id="process" checked>
+						<% } else { %>
+							<input style="margin-left:0px;margin-right:10px;" type="radio" name="status" value="process" id="process">
+						<% } %>	
+						Not Started : <% if (data[i]["complaint_status"] == "notstarted") { %>						
+							<input style="margin-left:0px;margin-right:10px;" type="radio" name="status" value="notstarted" id="notstarted" checked>
+						<% } else { %>
+							<input style="margin-left:0px;margin-right:10px;" type="radio" name="status" value="notstarted" id="notstarted">
+						<% } %>
 						<input type="submit" id="submit" value="Submit">
 						<input type="hidden" name="id" id="id" value= '<%= data[i].id %>' >
 						<input type="hidden" name="department" id="department" value="<%= department %>">

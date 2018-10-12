@@ -42,17 +42,7 @@ app.post('/department',(req,res)=>{
     .catch(err => res.send("Error: "+err))
     }
     else{
-        let status;
-        if(req.body['finish'] == 'on'){
-            status = 'finish'
-        }
-        else if(req.body['process'] == 'on'){
-            status = 'process'
-        }
-        else if(req.body['notstarted'] == 'on'){
-            status = 'notstarted'
-        }
-        complaintModel.update(req.body['id'], status, req.body['department'])
+        complaintModel.update(req.body['id'], req.body.status, req.body['department'])
         .then(department => complaintModel.list(department))
         .then(data =>  data['data']['complain_details'])
         .then(data => {
