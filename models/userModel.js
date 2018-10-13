@@ -57,5 +57,41 @@ userModel.getPrisma = (id) => {
     })
 }
 
+userModel.getId = (username) => {
+    return new Promise((resolve, reject) => {
+        fetch('https://hasuraa.herokuapp.com/v1alpha1/graphql', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+        },
+        body: JSON.stringify({query:'{user(where: {_and: [{username: { _eq : "'+username + '"}}]}) {id}}'})
+    })
+    .then(r => r.json())
+    .then(data => {
+        console.log(data['data']['user'][0]['id']);
+        return (data['data']['user'][0]['id']);
+    })
+  })
+}
+
+userModel.getUsername = (id) => {
+    return new Promise((resolve, reject) => {
+        fetch('https://hasuraa.herokuapp.com/v1alpha1/graphql', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+        },
+        body: JSON.stringify({query:'{user(where: {_and: [{id: { _eq : "'+ id + '"}}]}) {username}}'})
+        })
+        .then(r => r.json())
+        .then(data => {
+            console.log(data['data']['user'][0]['username']);
+            return (data['data']['user'][0]['username']);
+        })
+    })
+}
+
 module.exports = userModel;
 	
