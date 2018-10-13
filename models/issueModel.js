@@ -57,7 +57,6 @@ issueModel.addIssue = async function(body, userid, addressedUser) {
             issuesList[i] = {'issue': contractInstance.getIssue.call(i), 'addressedUser':addressedUser, 'user':user};
         }
         resolve(issuesList);
-    })
 }
 
 issueModel.listVotes = () => {
