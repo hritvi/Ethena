@@ -1,1 +1,4 @@
-contract.json
+public/contract.json
+node_modules/*
+bin/*
+npm-debug.log

@@ -57,7 +57,6 @@ app.get('/department',(req,res) => {
 })
 
 app.post('/department',(req,res)=>{
-    console.log("here")
     if(req.body['id'] == undefined){
         departmentModel.authenticate(req.body['department'],req.body['password'])
         .then(department => issueModel.list())
