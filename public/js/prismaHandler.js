@@ -1,6 +1,6 @@
 
 //after the script tags are loaded (web3 & jquery) run this function
-prismaHandler = (id, type) => {
+prismaHandler = (id, type, userId) => {
     //initialize 
     var label = {'same': 10,'different': 20}
     console.log(type)
@@ -19,9 +19,11 @@ prismaHandler = (id, type) => {
             id, scoreCount,
             { from: web3.eth.accounts[0] },
             function() {
-                prismaCount = contractInstance.getPrisma.call(id)
-                $('#prismaCount').html(prismaCount.toString())
-                $('[name="prisma"]').val(prismaCount)
+                if(String(id) == String(userId)){
+                    prismaCount = contractInstance.getPrisma.call(id)
+                    $('#prismaCount').html(prismaCount.toString())
+                    $('[name="prisma"]').val(prismaCount)
+                }
             });
     });
 };

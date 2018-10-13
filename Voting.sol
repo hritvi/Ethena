@@ -5,9 +5,11 @@ contract Voting {
   /* the mapping field below is equivalent to an associative array or hash.
   */
 
-  mapping (int => uint8) public votesReceived;
-  mapping (int => uint8) public userId;
-  mapping (int => int) public addressedUser;
+  mapping (int => int) public votesReceived;
+  mapping (int => int) public userId;
+  mapping (int => bytes32) public user;
+  mapping (int => int) public addressedUserId;
+  mapping (int => bytes32) public addressedUser;
   /* Solidity doesn't let you pass in an array of strings in the constructor (yet).
   We will use an array of bytes32 instead to store the list of candidates
   */
@@ -23,13 +25,19 @@ contract Voting {
     userId[0] = 0;
     userId[1] = 0;
     userId[2] = 1;
-    addressedUser[0] = 0;
-    addressedUser[1] = 2;
-    addressedUser[2] = 0;
+    addressedUserId[0] = 0;
+    addressedUserId[1] = 2;
+    addressedUserId[2] = 0;
+    addressedUser[0] = bytes32("tony");
+    addressedUser[1] = bytes32("tony");
+    addressedUser[2] = bytes32("tony");
+    user[0] = bytes32("");
+    user[1] = bytes32("");
+    user[2] = bytes32("");
   }
 
   // This function returns the total votes a candidate has received so far
-  function totalVotesFor(int id) returns (uint8) {
+  function totalVotesFor(int id) returns (int) {
     assert(int256(candidateList.length) > id);
     return votesReceived[id];
   }
@@ -54,10 +62,15 @@ contract Voting {
     return candidateList.length;
   }
 
-  function addIssue(bytes32 candidate, int user, int userAddressed) public {
+  function addIssue(bytes32 candidate, int userIdin, int userAddressedId) public {
     candidateList.push(candidate);
-    userId[int(candidateList.length) - 1] = uint8(user);
-    addressedUser[int(candidateList.length) - 1] = userAddressed;
+    userId[int(candidateList.length) - 1] = int(userIdin);
+    addressedUserId[int(candidateList.length) - 1] = userAddressedId;
+  }
+
+  function addUsers(bytes32 username, bytes32 addressedUsername) public {
+    addressedUser[int(candidateList.length) - 1] = addressedUsername;
+    user[int(candidateList.length) - 1] = username;
   }
 
   function bytes32ToString(bytes32 x) constant returns (string) {
@@ -82,12 +95,20 @@ contract Voting {
     return bytes32ToString(candidateList[id]);
   }
 
-  function getUserId(int id) returns (uint) {
+  function getUserId(int id) returns (int) {
     return userId[id];
   }
 
   function getAddressedUserId(int id) returns (int) {
-    return addressedUser[id];
+    return addressedUserId[id];
+  }
+
+  function getAddressedUser(int id) returns (string) {
+    return bytes32ToString(addressedUser[id]);
+  }
+  
+  function getUser(int id) returns (string) {
+    return bytes32ToString(user[id]);
   }
 
 }

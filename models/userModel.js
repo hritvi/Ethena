@@ -87,6 +87,10 @@ userModel.getUsername = (id) => {
         })
         .then(r => r.json())
         .then(data => {
+            if(data['data']['user'] == undefined){
+                console.log("Database doesnot have this id: "+id);
+                reject("Database doesnot have this id: "+id);
+            }
             console.log(data['data']['user'][0]['username']);
             resolve (data['data']['user'][0]['username']);
         })
