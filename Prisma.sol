@@ -29,9 +29,9 @@ contract Prisma {
 
   // This function increments the vote count for the specified candidate. This
   // is equivalent to casting a vote
-  function voteForCandidate(int id) {
+  function voteForCandidate(int id, uint8 scoreCount) {
     assert(int256(candidateList.length) > id);
-    votesReceived[id] += 1;
+    votesReceived[id] += scoreCount;
   }
 
   function validCandidate(bytes32 candidate) returns (bool) {

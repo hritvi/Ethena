@@ -1,7 +1,10 @@
 
 //after the script tags are loaded (web3 & jquery) run this function
-prismaHandler = (id) => {
+prismaHandler = (id, type) => {
     //initialize 
+    var label = {'same': 10,'different': 20}
+    console.log(type)
+    var scoreCount = label[type]
     var web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:1234"));
     var contractInstance;
     //load the json file we wrote to earlier
@@ -13,7 +16,7 @@ prismaHandler = (id) => {
         .at(balanceContract.address);
 
         contractInstance.voteForCandidate(
-            id,
+            id, scoreCount,
             { from: web3.eth.accounts[0] },
             function() {
                 prismaCount = contractInstance.getPrisma.call(id)

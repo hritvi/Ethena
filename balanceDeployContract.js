@@ -81,7 +81,7 @@ var deployedContract = VotingContract.new(
 
         //execute a transaction. The transaction id (output) is the proof that this transaction occurred and you can refer back to this at any time in the future. This transaction is immutable.
         console.log(
-          contractInstance.voteForCandidate(0, {
+          contractInstance.voteForCandidate(0,1, {
             from: web3.eth.accounts[0]
           })
         );

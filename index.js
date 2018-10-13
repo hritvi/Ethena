@@ -14,7 +14,7 @@ app.get('/',(req, res) => {
 
 app.post('/submit',(req, res) => {
     userData = {'id': req.body['userid'], 'name': req.body['username'], 'prisma': req.body['prisma']}
-    issueModel.addIssue(req.body['issue'], req.body['userid'])
+    issueModel.addIssue(req.body['issue'], req.body['userid'], req.body['handle'])
     .then((data) => {
         res.render('home',{data, 'user':userData});
     })
