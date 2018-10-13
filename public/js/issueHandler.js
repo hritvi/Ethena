@@ -27,15 +27,17 @@ window.onload = function() {
                 function() {
                     $("#votes-" + id).html(contractInstance.totalVotesFor.call(id).toString());
                     if(contractInstance.totalVotesFor.call(id) == threshold){
+                        currentUser = $('[name = "userid"]').attr("value")
+                        console.log("userid of the logged in user is "+ currentUser);
                         addressedUserId = Number(contractInstance.getAddressedUserId.call(id));
                         userId = Number(contractInstance.getUserId.call(id));
                         console.log('userId: '+ userId)
                         console.log('addressedUserId: '+ addressedUserId);
                         if(userId == addressedUserId){
-                            prismaHandler(Number(addressedUserId), 'same');
+                            prismaHandler(Number(addressedUserId), 'same', currentUser);
                         }
                         else{
-                            prismaHandler(Number(addressedUserId), 'different');
+                            prismaHandler(Number(addressedUserId), 'different', currentUser);
                         }
                     }
                     $('#upvote-'+id).removeAttr("onclick")
