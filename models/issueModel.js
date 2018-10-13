@@ -9,17 +9,14 @@ issueModel.addIssue = function(body, userid) {
         contractInstance = web3.eth
         .contract(JSON.parse(contract.abi))
         .at(contract.address);
-        console.log("Issue about to be added " + body+ userid)
         contractInstance.addIssue(body, userid, {
             from: web3.eth.accounts[0] })
-        console.log("Issue Added succesfully")
         issueCount = contractInstance.getIssueCount.call();
         issueCount = issueCount['c'][0];
         issuesList = []
         for(i=0;i<issueCount;i++){
             issuesList[i] = {'issue': contractInstance.getIssue.call(i)};
         }
-        console.log("Issue Added succesfully and retrieved")
         resolve(issuesList);
     })
 }

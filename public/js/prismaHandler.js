@@ -16,9 +16,7 @@ prismaHandler = (id) => {
             id,
             { from: web3.eth.accounts[0] },
             function() {
-                console.log("added token for "+ id);
                 prismaCount = contractInstance.getPrisma.call(id)
-                console.log("Token of this user is " + prismaCount);
                 $('#prismaCount').html(prismaCount.toString())
                 $('[name="prisma"]').val(prismaCount)
             });

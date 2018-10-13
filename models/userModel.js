@@ -25,7 +25,6 @@ userModel.authenticate = (username, password) => {
         }
         else{
             reject("Wrong Password");
-            console.log("Wrong Password");
         }
     });
 	});
@@ -45,7 +44,6 @@ userModel.insert = (body, res) => {
         return r.json()})
         .then(data => {
             resolve(data);
-            console.log(data);
         });
     });
 }
