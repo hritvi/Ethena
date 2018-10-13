@@ -1,0 +1,96 @@
+<html>
+<head>
+    <title>Complaint Portal</title>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css' rel='stylesheet' type='text/css'>
+    <style type="text/css">
+        body{
+            background-color: #e85c41;
+        }
+        .parent {
+            background-color: #fff;
+            width:40%;
+            margin-left:auto;
+            margin-right: auto;
+            padding: 3.5rem;
+            box-shadow: 0 0 4rem rgba(0,0,0,.3);
+        }
+        .caption{
+            margin-top:3rem;
+            font-size: 2rem;
+        }
+    </style>
+    
+    <!-- The script that handles the voting part -->
+    
+</head>
+<body>    
+    <center><div class="caption">Complaint Portal</div></center>
+    <br>
+    
+    <form action="/submit" method="POST" class="parent">
+        <a href="/department"><button type="button">Departments</button></a>
+        <a href="/tracking"><button type="button">Track your complaint</button></a>    
+        <table cellpadding=5px>
+			<tr><td>Complaint</td><td><textarea name="c-body" id="c-body" cols="30" rows="8"></textarea></td></tr>
+			<tr><td>Your Name</td><td><input type="text" name="p-name" id="p-name"></td></tr>
+			<tr><td>Locality</td><td><input type="text" name="p-locality" id="p-locality"></td></tr>
+			<tr><td>Pincode</td><td><input type="number" name="p-pincode" id="p-pincode"></td></tr>
+			<tr><td>City</td><td><input type="text" name="p-city" id="p-city"></td></tr>
+            <tr><td>State</td><td><input type="text" name="p-state" id="p-state"></td></tr>
+            <tr><td>Department concerned</td><td> <select name="department">
+                <option value="transportation">Transportation</option>
+                <option value="water">Water</option>
+                <option value="electricity">Electricity</option>
+                <option value="education">Education</option>
+                <option value="revenue">Revenue</option>
+                <option value="general">General</option>
+            </select></td></tr>
+            <tr><td><input type="submit"></td><td></td></tr>
+        </table>
+    </form>
+    
+    <hr>
+    <hr>
+    <hr>
+    
+    <!-- The voting part goes here -->
+    <h1>A Simple Voting Application</h1>
+    <div class="table-responsive">
+        <table class="table table-bordered" id="issuesTable">
+            <thead>
+                <tr>
+                    <th>Candidate</th>
+                    <th># of Votes</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Rama</td>
+                    <td id="voted-1"></td>
+                </tr>
+                <tr>
+                    <td>Nick</td>
+                    <td id="candidate-2"></td>
+                </tr>
+                <tr>
+                    <td>Claudius</td>
+                    <td id="candidate-3"></td>
+                </tr>
+                <tr>
+                    <td>Harsh</td>
+                    <td id="candidate-4"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <input type="text" id="issue" />
+    <button class="btn btn-primary" onclick="voteForCandidate(this.id)" id="upvote-1">Vote</button>
+    
+    
+</body>
+<script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js/dist/web3.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+crossorigin="anonymous"></script>
+<script src="js/issueHandler.js"></script>
+</html>
