@@ -2,7 +2,6 @@ const express = require('express')
 const app = express()
 const port = 3000
 app.use(express.static(__dirname+"/public"))
-let sentimentController = require('./controller/sentimentController.js')
 // let departmentController = require('./controller/departmentController.js')
 let departmentModel = require('./models/departmentModel.js')
 let complaintModel = require('./models/complaintModel.js')
@@ -17,7 +16,7 @@ app.get('/',(req, res) => {
 });
 
 app.post('/submit',(req, res) => {
-    sentimentController.findUrgency(req,res);
+    issueModel.addIssue(req.body['issue']);
 })
 
 app.get('/tracking', (req, res) => {

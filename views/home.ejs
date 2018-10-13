@@ -34,7 +34,7 @@
     <form action="/submit" method="POST" class="parent">
         <a href="/tracking"><button type="button">Track your complaint</button></a>  
         <table cellpadding=5px>
-			<tr><td>Complaint</td><td><textarea name="c-body" id="c-body" cols="30" rows="8"></textarea></td></tr>
+			<tr><td>Complaint</td><td><textarea name="issue" id="issue" cols="30" rows="8"></textarea></td></tr>
             <tr><td><input type="submit"></td><td></td></tr>
         </table>
     </form>  
@@ -46,20 +46,14 @@
 			<table class="table">
 				<tr class='complaint-row' id='head'>
 					<td>Complain</td>
-					<td>Urgency</td>
 					<td>Votes</td>
 					<td>Upvote</td>
-					<td>Status</td>
 				</tr>
 				<% for (var i=0; i < data.length; i++) { %>
 				<tr class = 'complaint-row'>
 					<td id = '<%= "issue-" + i %>' ><%= data[i].issue %></td>
-					<td id = '<%= "urgency-" + i %>'><%= data[i].urgency %></td>
 					<td id = '<%= "votes-" + i %>'></td>
 					<td><button id = '<%= "upvote-" + i %>' onclick="voteForCandidate(this.id)">Upvote</button></td>
-					<td id = '<%= "status-" + i %>'>
-						<%= data[i].status %>
-					</td>
 				</tr>
 				<% } %>
 			</table>

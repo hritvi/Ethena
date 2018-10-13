@@ -44,17 +44,6 @@ contract Prisma {
   }
 
   function addIssue(bytes32 candidate) {
-    // int length = candidateList.length + 1;
-    // bytes[] newCandidateList = new bytes[](length);
-    // for(uint i=0; i<newCandidateList.length; i++ ){
-    //   if(i == length-1){
-    //     newCandidateList[i] = candidate;
-    //   }
-    //   else{
-    //     newCandidateList[i] = candidateList[i];
-    //   }
-    // }
-    // candidateList = newCandidateList;
     candidateList.push(candidate);
   }
 }
