@@ -8,6 +8,7 @@ let departmentModel = require('./models/departmentModel.js')
 let complaintModel = require('./models/complaintModel.js')
 let trackModel = require('./models/trackModel.js')
 let userModel = require('./models/userModel.js')
+let issueModel = require('./models/issueModel.js')
 const bodyParser = require('body-parser');
 app.use(bodyParser());
 app.set('view engine', 'ejs');
@@ -56,22 +57,24 @@ app.get('/department',(req,res) => {
 })
 
 app.post('/department',(req,res)=>{
+    console.log("here")
     if(req.body['id'] == undefined){
-    departmentModel.authenticate(req.body['department'],req.body['password'])
-    .then(department => complaintModel.list(department))
-    .then(data => data['data']['complain_details'])
-    .then(data => {
-        department = req.body['department'];
-        res.render('department', {data, department})})
-    .catch(err => res.send("Error: "+err))
+        departmentModel.authenticate(req.body['department'],req.body['password'])
+        .then(department => issueModel.list())
+        // .then(contract => res.render(contract))
+        // .then(data => data['data']['complain_details'])
+        .then(data => {
+            res.render('department', {data})})
+        .catch(err => res.send("Error: "+err))
     }
     else{
         complaintModel.update(req.body['id'], req.body.status, req.body['department'])
-        .then(department => complaintModel.list(department))
-        .then(data =>  data['data']['complain_details'])
-        .then(data => {
-            department = req.body['department'];
-            return res.render('department', {data, department});})
+        .then(department => issueModel.list())
+        .then(contract => res.render(contract))
+        // .then(data =>  data['data']['complain_details'])
+        // .then(data => {
+        //     department = req.body['department'];
+        //     return res.render('department', {data, department});})
         .catch(err => res.send("Error "+err))
     }
 })
