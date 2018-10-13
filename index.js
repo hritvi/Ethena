@@ -13,7 +13,15 @@ app.get('/',(req, res) => {
 });
 
 app.post('/submit',(req, res) => {
-    issueModel.addIssue(req.body['issue']);
+    userData = {'id': req.body['userid'], 'name': req.body['username'], 'prisma': req.body['prisma']}
+    issueModel.addIssue(req.body['issue'], req.body['userid'])
+    .then((data) => {
+        console.log(userData+"here");
+        res.render('home',{data, 'user':userData});
+    })
+    .catch((err)=>{
+        console.log(err);
+    })
 })
 
 
@@ -26,14 +34,14 @@ app.post('/userlogin', (req, res) => {
     userModel.authenticate(req.body['username'], req.body['password'])
     .then((user) => {
         userData = user;
-        return userModel.getPrisma(user.id)
+        return userModel.getPrisma(user.id);
     })
     .then((prisma) => {userData['prisma'] = prisma;})
     .then(() => issueModel.list())
     .then((data)=>{
         console.log(userData);
-        res.render('home',{data, 'user':userData
-    });})
+        res.render('home',{data, 'user':userData});
+    })
     .catch((err)=>{
         console.log(err);
     })

@@ -32,9 +32,11 @@
     <center><div class="caption">Complaint Portal</div></center>
     <br>
     <form action="/submit" method="POST" class="parent">
-        <a href="/tracking"><button type="button">Track your complaint</button></a>  
         <table cellpadding=5px>
-			<tr><td>Complaint</td><td><textarea name="issue" id="issue" cols="30" rows="8"></textarea></td></tr>
+            <tr><td>Complaint</td><td><textarea name="issue" id="issue" cols="30" rows="8"></textarea></td></tr>
+            <input type="hidden" name='userid' value="<%= user.id %>">
+            <input type="hidden" name='username' value="<%= user.name %>">
+            <input type="hidden" name='prisma' value="<%= user.prisma %>">
             <tr><td><input type="submit"></td><td></td></tr>
         </table>
     </form>  
