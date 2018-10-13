@@ -4,7 +4,8 @@ var contract = require('../public/contract')
 function issueModel(){
 }
 
-issueModel.insert = function(body, urgency) {
+issueModel.insert = function(body, userid) {
+    
 }
 
 issueModel.list = () => {
