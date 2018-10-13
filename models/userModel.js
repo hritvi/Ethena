@@ -70,7 +70,7 @@ userModel.getId = (username) => {
     .then(r => r.json())
     .then(data => {
         console.log(data['data']['user'][0]['id']);
-        return (data['data']['user'][0]['id']);
+        resolve (data['data']['user'][0]['id']);
     })
   })
 }
@@ -88,7 +88,7 @@ userModel.getUsername = (id) => {
         .then(r => r.json())
         .then(data => {
             console.log(data['data']['user'][0]['username']);
-            return (data['data']['user'][0]['username']);
+            resolve (data['data']['user'][0]['username']);
         })
     })
 }

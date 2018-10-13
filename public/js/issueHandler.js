@@ -13,6 +13,8 @@ window.onload = function() {
         .contract(JSON.parse(contract.abi))
         .at(contract.address);
         
+        var threshold = 3;
+
         //on the vote button click, execute this function on the contract.
         //from: sign the transaction by using the first account
         issueCount = contractInstance.getIssueCount.call();
@@ -23,10 +25,18 @@ window.onload = function() {
                 id,
                 { from: web3.eth.accounts[0] },
                 function() {
-                    let div_id = "votes-" + id;
-                    $("#" + div_id).html(contractInstance.totalVotesFor.call(id).toString());
-                    if(contractInstance.totalVotesFor.call(id)==3){
-                        prismaHandler(Number(contractInstance.getUserId.call(id)));
+                    $("#votes-" + id).html(contractInstance.totalVotesFor.call(id).toString());
+                    if(contractInstance.totalVotesFor.call(id) == threshold){
+                        addressedUserId = Number(contractInstance.getAddressedUserId.call(id));
+                        userId = Number(contractInstance.getUserId.call(id));
+                        console.log('userId: '+ userId)
+                        console.log('addressedUserId: '+ addressedUserId);
+                        if(userId == addressedUserId){
+                            prismaHandler(Number(addressedUserId), 'same');
+                        }
+                        else{
+                            prismaHandler(Number(addressedUserId), 'different');
+                        }
                     }
                     $('#upvote-'+id).removeAttr("onclick")
                 });

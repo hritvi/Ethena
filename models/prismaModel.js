@@ -15,4 +15,20 @@ prismaModel.list = () => {
 prismaModel.update = (id, status, department) => {
 }
 
+prismaModel.listPrismas = () => {
+	return new Promise((resolve, reject) =>
+    {
+        contractInstance = web3.eth
+        .contract(JSON.parse(contract.abi))
+        .at(contract.address);
+        prismaCount = contractInstance.getPrismaCount.call();
+        prismaCount = prismaCount['c'][0];
+        prismaList = []
+        for(i=0;i<prismaCount;i++){
+            prismaList[i] = Number(contractInstance.getPrisma.call(i).toString());
+        }
+        resolve(issuesList);
+    })
+}
+
 module.exports = prismaModel;
