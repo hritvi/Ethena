@@ -36,8 +36,12 @@ app.get('/userlogin', (req, res) => {
 
 app.post('/userlogin', (req, res) => {
     userModel.authenticate(req.body['username'], req.body['password'])
-    .then(()=>{
-        res.render('home');
+    .then(() => issueModel.list())
+    .then((data)=>{
+        res.render('home',{data});
+    })
+    .catch((err)=>{
+        console.log(err);
     })
 })
 
