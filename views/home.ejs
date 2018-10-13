@@ -1,67 +1,411 @@
+
+<!DOCTYPE html>
 <html>
 <head>
-    <title>Complaint Portal</title>
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
-    <link href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css' rel='stylesheet' type='text/css'>
-    <style type="text/css">
-        body{
-            background-color: #e85c41;
-        }
-        .parent {
-            background-color: #fff;
-            width:40%;
-            margin-left:auto;
-            margin-right: auto;
-            padding: 3.5rem;
-            box-shadow: 0 0 4rem rgba(0,0,0,.3);
-        }
-        .caption{
-            margin-top:3rem;
-            font-size: 2rem;
-        }
-    </style>
-    
-    <!-- The script that handles the voting part -->
-    
+<meta charset="UTF-8">
+<title>Dashboard</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="" />
+<meta name="keywords" content="" />
+<link rel="stylesheet" type="text/css" href="css/animate.css">
+<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="css/line-awesome.css">
+<link rel="stylesheet" type="text/css" href="css/line-awesome-font-awesome.min.css">
+<link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
+<link rel="stylesheet" type="text/css" href="css/jquery.mCustomScrollbar.min.css">
+<link rel="stylesheet" type="text/css" href="lib/slick/slick.css">
+<link rel="stylesheet" type="text/css" href="lib/slick/slick-theme.css">
+<link rel="stylesheet" type="text/css" href="css/style.css">
+<link rel="stylesheet" type="text/css" href="css/responsive.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
-<body>    
-    <h4>User Information</h4>
-     <div>Name: <%= user.name %></div>
-    <div>Tokens: <%= user.prisma %></div>
-    <hr>
-    <center><div class="caption">Complaint Portal</div></center>
-    <br>
-    <form action="/submit" method="POST" class="parent">
-        <a href="/tracking"><button type="button">Track your complaint</button></a>  
-        <table cellpadding=5px>
-			<tr><td>Complaint</td><td><textarea name="issue" id="issue" cols="30" rows="8"></textarea></td></tr>
-            <tr><td><input type="submit"></td><td></td></tr>
-        </table>
-    </form>  
-    <hr>
-    <h3>Complaints and Issues</h3>
-    <div class="complaint-container">
-		<br><br>
-		<div class="complaint">
-			<table class="table">
-				<tr class='complaint-row' id='head'>
-					<td>Complain</td>
-					<td>Votes</td>
-					<td>Upvote</td>
-				</tr>
-				<% for (var i=0; i < data.length; i++) { %>
-				<tr class = 'complaint-row'>
-					<td id = '<%= "issue-" + i %>' ><%= data[i].issue %></td>
-					<td id = '<%= "votes-" + i %>'></td>
-					<td><button id = '<%= "upvote-" + i %>' onclick="voteForCandidate(this.id)">Upvote</button></td>
-				</tr>
-				<% } %>
-			</table>
-		</div>
-	</div>
-</body>
+
+
+<body oncontextmenu="return false;">
+	
+
+	<div class="wrapper">
+		
+
+
+		<header>
+			<div class="container">
+				<div class="header-data">
+					<div class="logo">
+						<a href="index.html" title=""><img src="images/logo.png" alt=""></a>
+					</div><!--logo end-->
+					<div class="search-bar">
+						<form>
+							<input type="text" name="search" placeholder="Search...">
+							<button type="submit"><i class="la la-search"></i></button>
+						</form>
+					</div><!--search-bar end-->
+					<nav>
+						<ul>
+							<li>
+								<a href="index.html" title="">
+									<span><img src="images/icon1.png" alt=""></span>
+									Home
+								</a>
+							</li>
+							<li>
+								<a href="companies.html" title="">
+									<span><img src="images/icon2.png" alt=""></span>
+									Companies
+								</a>
+								<ul>
+									<li><a href="companies.html" title="">Companies</a></li>
+									<li><a href="company-profile.html" title="">Company Profile</a></li>
+								</ul>
+							</li>
+							<li>
+								<a href="projects.html" title="">
+									<span><img src="images/icon3.png" alt=""></span>
+									Projects
+								</a>
+							</li>
+							<li>
+								<a href="profiles.html" title="">
+									<span><img src="images/icon4.png" alt=""></span>
+									Profiles
+								</a>
+								<ul>
+									<li><a href="user-profile.html" title="">User Profile</a></li>
+									<li><a href="my-profile-feed.html" title="">my-profile-feed</a></li>
+								</ul>
+							</li>
+							<li>
+								<a href="jobs.html" title="">
+									<span><img src="images/icon5.png" alt=""></span>
+									Jobs
+								</a>
+							</li>
+							<li>
+								<a href="#" title="" class="not-box-open">
+									<span><img src="images/icon6.png" alt=""></span>
+									Messages
+								</a>
+								<div class="notification-box msg">
+									<div class="nt-title">
+										<h4>Setting</h4>
+										<a href="#" title="">Clear all</a>
+									</div>
+									<div class="nott-list">
+										<div class="notfication-details">
+							  				<div class="noty-user-img">
+							  					<img src="images/resources/ny-img1.png" alt="">
+							  				</div>
+							  				<div class="notification-info">
+							  					<h3><a href="messages.html" title="">Jassica William</a> </h3>
+							  					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do.</p>
+							  					<span>2 min ago</span>
+							  				</div><!--notification-info -->
+						  				</div>
+						  				<div class="notfication-details">
+							  				<div class="noty-user-img">
+							  					<img src="images/resources/ny-img2.png" alt="">
+							  				</div>
+							  				<div class="notification-info">
+							  					<h3><a href="messages.html" title="">Jassica William</a></h3>
+							  					<p>Lorem ipsum dolor sit amet.</p>
+							  					<span>2 min ago</span>
+							  				</div><!--notification-info -->
+						  				</div>
+						  				<div class="notfication-details">
+							  				<div class="noty-user-img">
+							  					<img src="images/resources/ny-img3.png" alt="">
+							  				</div>
+							  				<div class="notification-info">
+							  					<h3><a href="messages.html" title="">Jassica William</a></h3>
+							  					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempo incididunt ut labore et dolore magna aliqua.</p>
+							  					<span>2 min ago</span>
+							  				</div><!--notification-info -->
+						  				</div>
+						  				<div class="view-all-nots">
+						  					<a href="messages.html" title="">View All Messsages</a>
+						  				</div>
+									</div><!--nott-list end-->
+								</div><!--notification-box end-->
+							</li>
+							<li>
+								<a href="#" title="" class="not-box-open">
+									<span><img src="images/icon7.png" alt=""></span>
+									Notification
+								</a>
+								<div class="notification-box">
+									<div class="nt-title">
+										<h4>Setting</h4>
+										<a href="#" title="">Clear all</a>
+									</div>
+									<div class="nott-list">
+										<div class="notfication-details">
+							  				<div class="noty-user-img">
+							  					<img src="images/resources/ny-img1.png" alt="">
+							  				</div>
+							  				<div class="notification-info">
+							  					<h3><a href="#" title="">Jassica William</a> Comment on your project.</h3>
+							  					<span>2 min ago</span>
+							  				</div><!--notification-info -->
+						  				</div>
+						  				<div class="notfication-details">
+							  				<div class="noty-user-img">
+							  					<img src="images/resources/ny-img2.png" alt="">
+							  				</div>
+							  				<div class="notification-info">
+							  					<h3><a href="#" title="">Jassica William</a> Comment on your project.</h3>
+							  					<span>2 min ago</span>
+							  				</div><!--notification-info -->
+						  				</div>
+						  				<div class="notfication-details">
+							  				<div class="noty-user-img">
+							  					<img src="images/resources/ny-img3.png" alt="">
+							  				</div>
+							  				<div class="notification-info">
+							  					<h3><a href="#" title="">Jassica William</a> Comment on your project.</h3>
+							  					<span>2 min ago</span>
+							  				</div><!--notification-info -->
+						  				</div>
+						  				<div class="notfication-details">
+							  				<div class="noty-user-img">
+							  					<img src="images/resources/ny-img2.png" alt="">
+							  				</div>
+							  				<div class="notification-info">
+							  					<h3><a href="#" title="">Jassica William</a> Comment on your project.</h3>
+							  					<span>2 min ago</span>
+							  				</div><!--notification-info -->
+						  				</div>
+						  				<div class="view-all-nots">
+						  					<a href="#" title="">View All Notification</a>
+						  				</div>
+									</div><!--nott-list end-->
+								</div><!--notification-box end-->
+							</li>
+						</ul>
+					</nav><!--nav end-->
+					<div class="menu-btn">
+						<a href="#" title=""><i class="fa fa-bars"></i></a>
+					</div><!--menu-btn end-->
+					<div class="user-account">
+						<div class="user-info">
+							<img src="images/resources/user.png" alt="">
+							<a href="#" title="">John</a>
+							<i class="la la-sort-down"></i>
+						</div>
+						<div class="user-account-settingss">
+							<h3>Online Status</h3>
+							<ul class="on-off-status">
+								<li>
+									<div class="fgt-sec">
+										<input type="radio" name="cc" id="c5">
+										<label for="c5">
+											<span></span>
+										</label>
+										<small>Online</small>
+									</div>
+								</li>
+								<li>
+									<div class="fgt-sec">
+										<input type="radio" name="cc" id="c6">
+										<label for="c6">
+											<span></span>
+										</label>
+										<small>Offline</small>
+									</div>
+								</li>
+							</ul>
+							<h3>Custom Status</h3>
+							<div class="search_form">
+								<form>
+									<input type="text" name="search">
+									<button type="submit">Ok</button>
+								</form>
+							</div><!--search_form end-->
+							<h3>Setting</h3>
+							<ul class="us-links">
+								<li><a href="profile-account-setting.html" title="">Account Setting</a></li>
+								<li><a href="#" title="">Privacy</a></li>
+								<li><a href="#" title="">Faqs</a></li>
+								<li><a href="#" title="">Terms & Conditions</a></li>
+							</ul>
+							<h3 class="tc"><a href="sign-in.html" title="">Logout</a></h3>
+						</div><!--user-account-settingss end-->
+					</div>
+				</div><!--header-data end-->
+			</div>
+		</header><!--header end-->	
+
+		<main>
+			<div class="main-section">
+				<div class="container">
+					<div class="main-section-data">
+						<div class="row">
+							<div class="col-lg-3 col-md-4 pd-left-none no-pd">
+								<div class="main-left-sidebar no-margin">
+									<div class="user-data full-width">
+										<div class="user-profile">
+											<div class="username-dt">
+												<div class="usr-pic">
+													<img src="images/resources/user-pic.png" alt="">
+												</div>
+											</div><!--username-dt end-->
+											<div class="user-specs">
+												<h3><%= user.name %></h3>
+											</div>
+										</div><!--user-profile end-->
+										<ul class="user-fw-status">
+											<li>
+												<h4>Prisma</h4>
+												<span id="prismaCount"><%= user.prisma %></span>
+											</li>
+										</ul>
+									</div><!--user-data end-->
+								</div><!--main-left-sidebar end-->
+							</div>
+							<div class="col-lg-6 col-md-8 no-pd">
+								<div class="main-ws-sec">
+									<div class="post-topbar">
+										<div class="user-picy">
+											<img src="images/resources/user-pic.png" alt="">
+										</div>
+										<div class="post-st">
+											<ul>
+												<li><a class="post_project active" href="#" title="">Add a achievement</a></li>
+												<li><a class="post-jb active" href="#" title="">Praise Someone Else</a></li>
+											</ul>
+										</div><!--post-st end-->
+									</div><!--post-topbar end-->
+									<div class="posts-section">
+										<% for (var i=0;i< data.length;i++){ %>
+										<div class="post-bar">
+											<div class="post_topbar">
+												<div class="usy-dt">
+													<img src="images/resources/us-pic.png" alt="">
+													<div class="usy-name">
+														<h3><%= user.name %></h3>
+													</div>
+												</div>
+											</div>
+											<div class="job_descp">
+												<p  id = '<%= "issue-" + i %>'><%= data[i].issue %></p>
+											</div>
+											<div class="job-status-bar">
+												<ul class="like-com">
+													<li>
+														<button id = '<%= "upvote-" + i %>' class="fa fa-heart" onclick="voteForCandidate(this.id)">Upvote</button>
+														<p id = '<%= "votes-" + i %>'></p>
+													</li> 
+												</ul>
+											</div>
+										</div><!--post-bar end-->
+										<% } %>
+									</div><!--posts-section end-->
+								</div><!--main-ws-sec end-->
+							</div>
+							<div class="col-lg-3 pd-right-none no-pd">
+								<div class="right-sidebar">
+									<div class="widget widget-about">
+										<img src="images/wd-logo.png" alt="">
+										<h3>Prismatic Possessor</h3>
+										<div class="sign_link">
+											<h3><a href="#" title="">Sign up</a></h3>
+											<a href="#" title="">View More</a>
+										</div>
+									</div><!--widget-about end-->
+									<div class="widget widget-about">
+										<img src="images/wd-logo.png" alt="">
+										<h3>Tantalizing TouchStone</h3>
+										<div class="sign_link">
+											<h3><a href="#" title="">Sign up</a></h3>
+											<a href="#" title="">View More</a>
+										</div>
+									</div><!--widget-about end-->
+									<div class="widget widget-about">
+										<img src="images/wd-logo.png" alt="">
+										<h3>Ardent Achiever</h3>
+										<div class="sign_link">
+											<h3><a href="#" title="">Sign up</a></h3>
+											<a href="#" title="">View More</a>
+										</div>
+									</div><!--widget-about end-->
+								</div><!--right-sidebar end-->
+							</div>
+						</div>
+					</div><!-- main-section-data end-->
+				</div> 
+			</div>
+		</main>
+
+
+
+
+		<div class="post-popup pst-pj">
+			<div class="post-project">
+				<h3>Add a achievement</h3>
+				<div class="post-project-fields">
+					<form action="/submit" method="POST">
+						<div class="row">
+							<input type="hidden" name="handle" value="<%= user.name %>">
+							<div class="col-lg-12">
+								<textarea name="issue" placeholder="Description"></textarea>
+							</div>
+							<input type="hidden" name='userid' value="<%= user.id %>">
+				            <input type="hidden" name='username' value="<%= user.name %>">
+				            <input type="hidden" name='prisma' value="<%= user.prisma %>">
+				            <div class="col-lg-12">
+								<ul>
+									<li><button class="active" type="submit" value="post">Post</button></li>
+									<li><a href="#" title="">Cancel</a></li>
+								</ul>
+							</div>
+							
+						</div>
+					</form>
+				</div><!--post-project-fields end-->
+				<a href="#" title=""><i class="fa fa-times"></i></a>
+			</div><!--post-project end-->
+		</div><!--post-project-popup end-->
+
+		<div class="post-popup job_post">
+			<div class="post-project">
+				<h3>Praise Someone Else</h3>
+				<div class="post-project-fields">
+					<form action="/submit" method="POST">
+						<div class="row">
+							<div class="col-lg-12">
+								<input type="text" name="handle" placeholder="username">
+							</div>
+							<div class="col-lg-12">
+								<textarea name="issue" placeholder="Description"></textarea>
+							</div>
+							<input type="hidden" name='userid' value="<%= user.id %>">
+				            <input type="hidden" name='username' value="<%= user.name %>">
+				            <input type="hidden" name='prisma' value="<%= user.prisma %>">
+				            <div class="col-lg-12">
+								<ul>
+									<li><button class="active" type="submit" value="post">Post</button></li>
+									<li><a href="#" title="">Cancel</a></li>
+								</ul>
+							</div>
+							
+						</div>
+					</form>
+				</div><!--post-project-fields end-->
+				<a href="#" title=""><i class="fa fa-times"></i></a>
+			</div><!--post-project end-->
+		</div><!--post-project-popup end-->
+	</div><!--theme-layout end-->
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/popper.js"></script>
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/jquery.mCustomScrollbar.js"></script>
+<script type="text/javascript" src="lib/slick/slick.min.js"></script>
+<script type="text/javascript" src="js/scrollbar.js"></script>
+<script type="text/javascript" src="js/script.js"></script>
+<script type="text/javascript" src="js/disabled.js"></script>
 <script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js/dist/web3.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
 crossorigin="anonymous"></script>
+<script src="js/prismaHandler.js"></script>
 <script src="js/issueHandler.js"></script>
-</html>
+</body>
+<script>'undefined'=== typeof _trfq || (window._trfq = []);'undefined'=== typeof _trfd && (window._trfd=[]),_trfd.push({'tccl.baseHost':'secureserver.net'}),_trfd.push({'ap':'cpsh'},{'server':'a2plcpnl0235'}) // Monitoring performance to make your website faster. If you want to opt-out, please contact web hosting support.</script><script src='https://img1.wsimg.com/tcc/tcc_l.combined.1.0.6.min.js'></script></html>
