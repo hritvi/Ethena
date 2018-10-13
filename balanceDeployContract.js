@@ -76,8 +76,8 @@ var deployedContract = VotingContract.new(
           "\n------------ LOGGING Executing contract calls -------------\n"
         );
         console.log("Votes for Elevator doesnot work before: ");
-        //totalVotesFor() is a function in our contract
-        console.log(contractInstance.totalVotesFor.call(0).valueOf());
+        //getPrisma() is a function in our contract
+        console.log(contractInstance.getPrisma.call(0).valueOf());
 
         //execute a transaction. The transaction id (output) is the proof that this transaction occurred and you can refer back to this at any time in the future. This transaction is immutable.
         console.log(
@@ -88,7 +88,7 @@ var deployedContract = VotingContract.new(
 
         //votes for Elevator doesnot work should go up by 1
         console.log("Votes for Elevator doesnot work after: ");
-        console.log(contractInstance.totalVotesFor.call(0).valueOf());
+        console.log(contractInstance.getPrisma.call(0).valueOf());
         //write the contract address and abi to file for client side JS to use to interact with contract
         fs.writeFile(
           "./public/balanceContract.json",

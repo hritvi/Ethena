@@ -1,6 +1,4 @@
-var solc = require("solc"); 
 var Web3 = require("web3"); 
-var fs = require("fs"); 
 var web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545")); 
 var contract = require('../public/contract')
 function issueModel(){

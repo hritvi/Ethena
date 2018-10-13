@@ -35,11 +35,18 @@ app.get('/userlogin', (req, res) => {
 })
 
 app.post('/userlogin', (req, res) => {
+    var userData;
     userModel.authenticate(req.body['username'], req.body['password'])
+    .then((user) => {
+        userData = user;
+        return userModel.getPrisma(user.id)
+    })
+    .then((prisma) => {userData['prisma'] = prisma;})
     .then(() => issueModel.list())
     .then((data)=>{
-        res.render('home',{data});
-    })
+        console.log(userData);
+        res.render('home',{data, 'user':userData
+    });})
     .catch((err)=>{
         console.log(err);
     })

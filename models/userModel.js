@@ -1,4 +1,8 @@
 var fetch = require('node-fetch');
+var Web3 = require("web3"); 
+var web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:1234")); 
+var contract = require('../public/balanceContract')
+
 function userModel() {
 
 }
@@ -16,8 +20,8 @@ userModel.authenticate = (username, password) => {
     .then(r => r.json())
     .then(data => {
         if(data['data']['user'][0]['id'] != undefined){
-            resolve(username);
-            console.log(username);
+            var user = {'id': data['data']['user'][0]['id'], 'name': username}
+            resolve(user);
         }
         else{
             reject("Wrong Password");
@@ -42,9 +46,17 @@ userModel.insert = (body, res) => {
         .then(data => {
             resolve(data);
             console.log(data);
-            
         });
     });
+}
+
+userModel.getPrisma = (id) => {
+    return new Promise((resolve, reject) => {
+        contractInstance = web3.eth
+        .contract(JSON.parse(contract.abi))
+        .at(contract.address);
+        resolve(contractInstance.getPrisma.call(id));
+    })
 }
 
 module.exports = userModel;

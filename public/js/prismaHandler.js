@@ -23,9 +23,9 @@ prismaHandler = (id) => {
             { from: web3.eth.accounts[0] },
             function() {
                 console.log("added token for "+ id);
-                console.log("Token of this user is " + contractInstance.totalVotesFor.call(id));
+                console.log("Token of this user is " + contractInstance.getPrisma.call(id));
                 // let div_id = "token-" + id;
-                // $("#" + div_id).html(contractInstance.totalVotesFor.call(id).toString());
+                // $("#" + div_id).html(contractInstance.getPrisma.call(id).toString());
             });
             
         // window.addIssue = function(issue) {
@@ -38,7 +38,7 @@ prismaHandler = (id) => {
         //after we have an instance of the contract update the initial candidate votes
         //recall that during deploying the contract we updated votes for Rama to 1
         // for (var i = 0; i < issueCount; i++) {
-        //     let val = contractInstance.totalVotesFor.call(i).toString();
+        //     let val = contractInstance.getPrisma.call(i).toString();
         //     console.log("val "+val);
         //     $("#votes-" + i).html(val);
         // }

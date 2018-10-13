@@ -22,7 +22,7 @@ contract Prisma {
   }
 
   // This function returns the total votes a candidate has received so far
-  function totalVotesFor(int id) returns (uint8) {
+  function getPrisma(int id) returns (uint8) {
     assert(int256(candidateList.length) > id);
     return votesReceived[id];
   }
