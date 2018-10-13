@@ -11,39 +11,16 @@ prismaHandler = (id) => {
         contractInstance = web3.eth
         .contract(JSON.parse(balanceContract.abi))
         .at(balanceContract.address);
-        
-        //on the vote button click, execute this function on the contract.
-        //from: sign the transaction by using the first account
-        // issueCount = contractInstance.getIssueCount.call();
-        // issueCount = issueCount['c'][0];
-        // console.log(issueCount);
-        // issue = $("#issue").val();
+
         contractInstance.voteForCandidate(
             id,
             { from: web3.eth.accounts[0] },
             function() {
                 console.log("added token for "+ id);
-                console.log("Token of this user is " + contractInstance.getPrisma.call(id));
-                // let div_id = "token-" + id;
-                // $("#" + div_id).html(contractInstance.getPrisma.call(id).toString());
+                prismaCount = contractInstance.getPrisma.call(id)
+                console.log("Token of this user is " + prismaCount);
+                $('#prismaCount').html(prismaCount.toString())
+                $('[name="prisma"]').val(prismaCount)
             });
-            
-        // window.addIssue = function(issue) {
-        //     contractInstance.addUser(issue,
-        //         { from: web3.eth.accounts[0] }, function() {
-        //             window.console.log("Issue added");
-        //         });
-        //     }
-            
-        //after we have an instance of the contract update the initial candidate votes
-        //recall that during deploying the contract we updated votes for Rama to 1
-        // for (var i = 0; i < issueCount; i++) {
-        //     let val = contractInstance.getPrisma.call(i).toString();
-        //     console.log("val "+val);
-        //     $("#votes-" + i).html(val);
-        // }
     });
 };
-        
-        
-        
