@@ -6,7 +6,7 @@ contract Voting {
   */
 
   mapping (int => uint8) public votesReceived;
-
+  mapping (int => uint8) public userId;
   /* Solidity doesn't let you pass in an array of strings in the constructor (yet).
   We will use an array of bytes32 instead to store the list of candidates
   */
@@ -19,6 +19,9 @@ contract Voting {
   */
   function Voting(bytes32[] candidateNames)  public {
     candidateList = candidateNames;
+    userId[0] = 0;
+    userId[1] = 0;
+    userId[2] = 1;
   }
 
   // This function returns the total votes a candidate has received so far
@@ -47,8 +50,9 @@ contract Voting {
     return candidateList.length;
   }
 
-  function addIssue(bytes32 candidate)  public {
+  function addIssue(bytes32 candidate, int user)  public {
     candidateList.push(candidate);
+    userId[int(candidateList.length) -1] = uint8(user);
   }
 
   function bytes32ToString(bytes32 x) constant returns (string) {
@@ -71,5 +75,9 @@ contract Voting {
   function getIssue(uint id) returns (string) {
     assert((candidateList.length) > id);
     return bytes32ToString(candidateList[id]);
+  }
+
+  function getUserId(int id) returns (uint) {
+    return userId[id];
   }
 }
