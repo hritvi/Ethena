@@ -5,48 +5,58 @@ var userModel = require('./userModel')
 function issueModel(){
 }
 
-issueModel.addIssue = function(body, userid, addressedUser) {
-    return new Promise((resolve, reject) => {
+issueModel.addIssue = async function(body, userid, addressedUser) {
+    contractInstance = web3.eth
+    .contract(JSON.parse(contract.abi))
+    .at(contract.address);
+    var addressedUserId;
+    await userModel.getId(addressedUser)
+    .then((data) => {
+        addressedUserId = data;
+    })
+    console.log("Issue About to be added")
+    contractInstance.addIssue(body, userid, addressedUserId, {
+        from: web3.eth.accounts[0] })
+    console.log("Issue added")
+    issueCount = contractInstance.getIssueCount.call();
+    issueCount = issueCount['c'][0];
+    issuesList = []
+    for(i=0;i<issueCount;i++){
+        userId = contractInstance.getUserId.call(i)
+        addressedUserId = contractInstance.getAddressedUserId.call(i)
+        var user;
+        await userModel.getUsername(Number(userId))
+        .then((userFed) => {
+            user = userFed;
+        })
+        await userModel.getUsername(Number(addressedUserId))
+        .then((data) => {addressedUser = data})
+        issuesList[i] = {'issue': contractInstance.getIssue.call(i), 'addressedUser':addressedUser, 'user':user};
+    }
+    return issuesList;
+}
+    
+    issueModel.list = async function listingData() {
         contractInstance = web3.eth
         .contract(JSON.parse(contract.abi))
         .at(contract.address);
-        console.log(body+ " " + userid+ " "+ addressedUser);
-        addressedUserId = Number(userModel.getId(addressedUser))
-        userid = Number(userid)
-        user = String(userModel.getUsername(userid))
-        console.log("Issue About to be added")
-        contractInstance.addIssue(body, userid, addressedUserId, {
-            from: web3.eth.accounts[0] })
-            console.log("Issue added")
-            issueCount = contractInstance.getIssueCount.call();
-            issueCount = issueCount['c'][0];
-            issuesList = []
-            for(i=0;i<issueCount;i++){
-                issue = contractInstance.getIssue.call(i)
-                issuesList[i] = {'issue': issue, 'addressedUser':addressedUser, 'user':user};
-            }
-            resolve(issuesList);
-        })
-    }
-    
-    issueModel.list = () => {
-        return new Promise((resolve, reject) =>
-        {
-            contractInstance = web3.eth
-            .contract(JSON.parse(contract.abi))
-            .at(contract.address);
-            issueCount = contractInstance.getIssueCount.call();
-            issueCount = issueCount['c'][0];
-            issuesList = []
-            for(i=0;i<issueCount;i++){
-                userId = contractInstance.getUserId.call(i)
-                user = String(userModel.getUsername(Number(userId)))
-                addressedUserId = contractInstance.getAddressedUserId.call(i)
-                addressedUser = String(userModel.getUsername(Number(addressedUserId)))
-                issuesList[i] = {'issue': contractInstance.getIssue.call(i), 'addressedUser':addressedUser, 'user':user};
-            }
-            resolve(issuesList);
-        })
+        issueCount = contractInstance.getIssueCount.call();
+        issueCount = issueCount['c'][0];
+        issuesList = []
+        for(i=0;i<issueCount;i++){
+            userId = contractInstance.getUserId.call(i)
+            addressedUserId = contractInstance.getAddressedUserId.call(i)
+            var user;
+            await userModel.getUsername(Number(userId))
+            .then((userFed) => {
+                user = userFed;
+            })
+            var addressedUser;
+            await userModel.getUsername(Number(addressedUserId))
+            .then((data) => {addressedUser = data})
+            issuesList[i] = {'issue': contractInstance.getIssue.call(i), 'addressedUser':addressedUser, 'user':user};
+        }
+        return issuesList;
     }
     
     issueModel.update = (id, status, department) => {
