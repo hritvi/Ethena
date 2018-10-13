@@ -37,6 +37,22 @@ issueModel.list = () => {
     })
 }
 
+issueModel.listVotes = () => {
+    return new Promise((resolve, reject) =>
+    {
+        contractInstance = web3.eth
+        .contract(JSON.parse(contract.abi))
+        .at(contract.address);
+        issueCount = contractInstance.getIssueCount.call();
+        issueCount = issueCount['c'][0];
+        issuesList = []
+        for(i=0;i<issueCount;i++){
+            issuesList[i] = Number(contractInstance.totalVotesFor.call(i).toString());
+        }
+        resolve(issuesList);
+    })
+}
+
 issueModel.update = (id, status, department) => {
 }
 

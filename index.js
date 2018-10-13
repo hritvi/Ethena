@@ -5,6 +5,7 @@ app.use(express.static(__dirname+"/public"))
 // let departmentController = require('./controller/departmentController.js')
 let userModel = require('./models/userModel.js')
 let issueModel = require('./models/issueModel.js')
+let prismaModel = require('./models/prismaModel.js')
 const bodyParser = require('body-parser');
 app.use(bodyParser());
 app.set('view engine', 'ejs');
@@ -41,6 +42,25 @@ app.post('/userlogin', (req, res) => {
     })
     .catch((err)=>{
         console.log(err);
+    })
+})
+
+app.get('/leaderboard', (req, res) => {
+    var voteData;
+    issueModel.listVotes()
+    .then((data) => {
+        console.log(data);
+        data.sort();
+        voteData = data;
+     // res.render('leaderboard', {data})
+    })
+    .then(() => prismaModel.listPrismas())
+    .then((data) => {
+        console.log(data)
+        console.log("now here is the vote data")
+        console.log(voteData)
+        data.sort();
+        res.render('leaderboard', {data, voteData })
     })
 })
 

@@ -43,6 +43,10 @@ contract Prisma {
     return false;
   }
 
+  function getPrismaCount() returns (uint256) {
+    return candidateList.length;
+  }
+
   function addIssue(bytes32 candidate) {
     candidateList.push(candidate);
   }
