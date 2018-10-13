@@ -14,6 +14,11 @@ issueModel.addIssue = async function(body, userid, addressedUser) {
     .then((data) => {
         addressedUserId = data;
     })
+    var user;
+    await userModel.getUsername(Number(userId))
+    .then((userFed) => {
+        user = userFed;
+    })
     console.log("Issue About to be added")
     contractInstance.addIssue(body, userid, addressedUserId, {
         from: web3.eth.accounts[0] })
@@ -24,7 +29,6 @@ issueModel.addIssue = async function(body, userid, addressedUser) {
     for(i=0;i<issueCount;i++){
         userId = contractInstance.getUserId.call(i)
         addressedUserId = contractInstance.getAddressedUserId.call(i)
-        var user;
         await userModel.getUsername(Number(userId))
         .then((userFed) => {
             user = userFed;
