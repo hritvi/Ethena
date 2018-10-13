@@ -17,34 +17,39 @@ issueModel.addIssue = function(body, userid, addressedUser) {
         console.log("Issue About to be added")
         contractInstance.addIssue(body, userid, addressedUserId, {
             from: web3.eth.accounts[0] })
-        console.log("Issue added")
-        issueCount = contractInstance.getIssueCount.call();
-        issueCount = issueCount['c'][0];
-        issuesList = []
-        for(i=0;i<issueCount;i++){
-            issuesList[i] = {'issue': contractInstance.getIssue.call(i), 'addressedUser':addressedUser, 'user':user};
-        }
-        resolve(issuesList);
-    })
-}
-
-issueModel.list = () => {
-    return new Promise((resolve, reject) =>
-    {
-        contractInstance = web3.eth
-        .contract(JSON.parse(contract.abi))
-        .at(contract.address);
-        issueCount = contractInstance.getIssueCount.call();
-        issueCount = issueCount['c'][0];
-        issuesList = []
-        for(i=0;i<issueCount;i++){
-            issuesList[i] = {'issue': contractInstance.getIssue.call(i)};
-        }
-        resolve(issuesList);
-    })
-}
-
-issueModel.update = (id, status, department) => {
-}
-
-module.exports = issueModel;
+            console.log("Issue added")
+            issueCount = contractInstance.getIssueCount.call();
+            issueCount = issueCount['c'][0];
+            issuesList = []
+            for(i=0;i<issueCount;i++){
+                issue = contractInstance.getIssue.call(i)
+                issuesList[i] = {'issue': issue, 'addressedUser':addressedUser, 'user':user};
+            }
+            resolve(issuesList);
+        })
+    }
+    
+    issueModel.list = () => {
+        return new Promise((resolve, reject) =>
+        {
+            contractInstance = web3.eth
+            .contract(JSON.parse(contract.abi))
+            .at(contract.address);
+            issueCount = contractInstance.getIssueCount.call();
+            issueCount = issueCount['c'][0];
+            issuesList = []
+            for(i=0;i<issueCount;i++){
+                userId = contractInstance.getUserId.call(i)
+                user = String(userModel.getUsername(Number(userId)))
+                addressedUserId = contractInstance.getAddressedUserId.call(i)
+                addressedUser = String(userModel.getUsername(Number(addressedUserId)))
+                issuesList[i] = {'issue': contractInstance.getIssue.call(i), 'addressedUser':addressedUser, 'user':user};
+            }
+            resolve(issuesList);
+        })
+    }
+    
+    issueModel.update = (id, status, department) => {
+    }
+    
+    module.exports = issueModel;

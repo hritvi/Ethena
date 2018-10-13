@@ -37,6 +37,7 @@ app.post('/userlogin', (req, res) => {
     .then((prisma) => {userData['prisma'] = prisma;})
     .then(() => issueModel.list())
     .then((data)=>{
+        console.log(data)
         res.render('home',{data, 'user':userData});
     })
     .catch((err)=>{
