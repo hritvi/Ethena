@@ -27,6 +27,10 @@ window.onload = function() {
                     console.log("voted for id "+ id);
                     let div_id = "votes-" + id;
                     $("#" + div_id).html(contractInstance.totalVotesFor.call(id).toString());
+                    if(contractInstance.totalVotesFor.call(id)==3){
+                        console.log("get token");
+                        prismaHandler(Number(contractInstance.getUserId.call(id)));
+                    }
                 });
             };
             
