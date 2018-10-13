@@ -12,6 +12,8 @@ issueModel.addIssue = function(body, userid, addressedUser) {
         .at(contract.address);
         console.log(body+ " " + userid+ " "+ addressedUser);
         addressedUserId = Number(userModel.getId(addressedUser))
+        userid = Number(userid)
+        user = String(userModel.getUsername(userid))
         console.log("Issue About to be added")
         contractInstance.addIssue(body, userid, addressedUserId, {
             from: web3.eth.accounts[0] })
@@ -20,7 +22,7 @@ issueModel.addIssue = function(body, userid, addressedUser) {
         issueCount = issueCount['c'][0];
         issuesList = []
         for(i=0;i<issueCount;i++){
-            issuesList[i] = {'issue': contractInstance.getIssue.call(i), 'addressedUser':addressedUser};
+            issuesList[i] = {'issue': contractInstance.getIssue.call(i), 'addressedUser':addressedUser, 'user':user};
         }
         resolve(issuesList);
     })
