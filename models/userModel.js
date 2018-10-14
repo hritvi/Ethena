@@ -20,7 +20,7 @@ userModel.authenticate = (username, password) => {
     .then(r => r.json())
     .then(data => {
         if(data['data']['user'][0]['id'] != undefined){
-            var user = {'id': data['data']['user'][0]['id'], 'name': username}
+            var user = {'id': data['data']['user'][0]['id'] , 'name': username}
             resolve(user);
         }
         else{
