@@ -3,7 +3,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Dashboard</title>
+<title>Athena | Dashboard</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="" />
 <meta name="keywords" content="" />
@@ -37,7 +37,7 @@
 		    Athena
 		  </a>
 		  <a href="/" class="navbar-right-navigation">
-		    LogOut
+		    Logout
 		  </a>
 		</header>
 
@@ -109,7 +109,7 @@
 											<div class="job-status-bar">
 												<ul class="like-com">
 													<li>
-														<button style="border: none;" type='button' id = '<%= "upvote-" + i %>' onclick="voteForCandidate(this.id)">
+														<button style="border: none; background: white;" type='button' id = '<%= "upvote-" + i %>' onclick="voteForCandidate(this.id)">
 														  <img src="./images/clapping.png" alt="">&nbsp;&nbsp;  
 														  <span id='<%= "votes-" + i %>'  style="margin-left: 2rem;"></span>
 														</button>
@@ -170,7 +170,7 @@
 				            <input type="hidden" name='prisma' value="<%= user.prisma %>">
 				            <div class="col-lg-12">
 								<ul>
-									<li><button class="active" type="submit" value="post">Post</button></li>
+									<li><button class="active" type="submit" value="post" onclick="selfdisableButton()" id="selfpost">Post</button></li>
 									<li><a href="#" title="">Cancel</a></li>
 								</ul>
 							</div>
@@ -199,7 +199,7 @@
 				            <input type="hidden" name='prisma' value="<%= user.prisma %>">
 				            <div class="col-lg-12">
 								<ul>
-									<li><button class="active" type="submit" value="post">Post</button></li>
+									<li><button class="active" type="submit" value="post" onclick="elseDisableButton()" id="elsepost">Post</button></li>
 									<li><a href="#" title="">Cancel</a></li>
 								</ul>
 							</div>
@@ -225,7 +225,22 @@ crossorigin="anonymous"></script>
 <script src="js/prismaHandler.js"></script>
 <script src="js/issueHandler.js"></script>
 </body>
+<script>
+	var timess = 0;
+	var timese = 0;
+	function elseDisableButton() {
+		timese++;
+		if(timese >= 1) {
+			document.getElementById('elsepost').disabled = true;
+		}
+	}
+	function selfDisableButton() {
+		timess++;
+		if(timess >= 1) {
+			document.getElementById('selfpost').disabled = true;
+		}
+	}
+</script>
 <script>'undefined'=== typeof _trfq || (window._trfq = []);'undefined'=== typeof _trfd && (window._trfd=[]),_trfd.push({'tccl.baseHost':'secureserver.net'}),_trfd.push({'ap':'cpsh'},{'server':'a2plcpnl0235'}) // Monitoring performance to make your website faster. If you want to opt-out, please contact web hosting support.</script><script src='https://img1.wsimg.com/tcc/tcc_l.combined.1.0.6.min.js'>	
 </script>
 </html>
-id = '<%= "upvote-" + i %>' onclick="voteForCandidate(this.id)"
