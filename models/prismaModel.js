@@ -30,9 +30,6 @@ prismaModel.listPrismas = () => {
             if(username != undefined)
                 prismaList.push({prisma , username});
         }
-        if(prismaList.length == 0){
-            prismaList.push({username:'tony', prisma:'0'})
-        }
         prismaList.sort((a,b) => (a.prisma > b.prisma) ? -1 : ((b.prisma > a.prisma) ? -1 : 0)); 
         resolve(prismaList);
     })

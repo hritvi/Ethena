@@ -33,6 +33,7 @@ window.onload = function() {
                         userId = Number(contractInstance.getUserId.call(id));
                         console.log('userId: '+ userId)
                         console.log('addressedUserId: '+ addressedUserId);
+                        addressedUser = String(contractInstance.getAddressedUser.call(id));
                         if(userId == addressedUserId){
                             prismaHandler(Number(addressedUserId), 'same', addressedUser, currentUser);
                         }

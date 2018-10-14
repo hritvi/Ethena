@@ -23,7 +23,8 @@ contract Prisma {
     user[0] = bytes32("tony");
     user[1] = bytes32("hritvi");
     user[2] = bytes32("bhartiya");
-    user[3] = bytes32("palak");
+    user[3] = bytes32("supra");
+    user[4] = bytes32("palak");
   }
 
   // This function returns the total votes a candidate has received so far

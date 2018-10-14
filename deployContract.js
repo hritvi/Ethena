@@ -43,7 +43,7 @@ var contractInstance;
 //The final parameter is a callback function. After the contract is deployed this function will be called with either an error or our contract instance
 
 var deployedContract = VotingContract.new(
-  ["Selected for ICPC world finals", "Won hackInOut", "Ranked first at syntax-error", "Represented the organisation at an International Conference", "Completed the StandOut project in half the proposed time."],
+  ["Selected for ICPC world finals", "Won hackInOut", "Ranked first at syntax-error", "Organised a Conference", "Create Disaster Awareness"],
   {
     data: byteCode,
     from: web3.eth.accounts[0],
