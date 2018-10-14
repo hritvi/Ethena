@@ -65,8 +65,9 @@ issueModel.listVotes = () => {
         }
         issuesList.sort();
         for(i=0; i<issueCount; i++){
-            issuesList[i] = {'username': contractInstance.getUser.call(Number(contractInstance.getUserId.call(i).toString())).toString(), 'votes': issuesList[i]}
+            issuesList[i] = {'username': String(contractInstance.getUser.call(i)), 'votes': issuesList[i]}
         }
+        issuesList.reverse();
         resolve(issuesList);
     })
 }

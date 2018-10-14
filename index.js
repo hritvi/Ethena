@@ -14,10 +14,24 @@ app.get('/',(req, res) => {
 });
 
 app.post('/submit',(req, res) => {
+    var issueData;
+    var topVote;
+    var topPrisma;
     userData = {'id': req.body['userid'], 'name': req.body['username'], 'prisma': req.body['prisma']}
     issueModel.addIssue(req.body['issue'], req.body['userid'], req.body['handle'], req.body['username'])
     .then((data) => {
-        res.render('home',{data, 'user':userData});
+        issueData = data;
+        // res.render{'home',{data, 'user':userData}}
+    })
+    .then(() => issueModel.listVotes())
+    .then((data) => {
+        topVote = data[0];
+    })
+    .then(() => prismaModel.listPrismas())
+    .then((data) => {
+        topPrisma =  data[0];
+        data = issueData;
+        res.render('home', {data, 'user':userData, topPrisma, topVote});
     })
     .catch((err)=>{
         console.log(err);
@@ -30,6 +44,9 @@ app.get('/userlogin', (req, res) => {
 
 app.post('/userlogin', (req, res) => {
     var userData;
+    var issueData;
+    var topVote;
+    var topPrisma;
     userModel.authenticate(req.body['username'], req.body['password'])
     .then((user) => {
         userData = user;
