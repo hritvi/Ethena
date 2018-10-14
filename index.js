@@ -25,16 +25,20 @@ app.post('/submit',(req, res) => {
         // res.render{'home',{data, 'user':userData}}
     })
     .then(() => issueModel.listVotesAndRank(req.body['username']))
-    .then(([data, rank]) => {
-        rankC = rank;
-        topVote = data[0];
+    .then((dataTemp) => {
+        topVote = dataTemp['data'][0];
+        rankC = dataTemp['rank'];
+        topPost = dataTemp.data2['0'];
+        rankB = dataTemp['rank2'];
     })
     .then(() => prismaModel.listPrismasAndRank(req.body['username']))
-    .then(([data, rank]) => {
-        console.log(data);
-        topPrisma =  data[0];
+    .then((dataTemp) => {
+        topPrisma =  dataTemp.data[0];
+        console.log("prisma data received : "+ dataTemp.data);
         data = issueData;
-        res.render('home', {data, 'user':userData, topPrisma, topVote, rankC, 'rankA':rank});
+        rank = dataTemp.rank;
+        console.log(rank, rankC);
+        res.render('home', {data, 'user':userData, topPrisma, topPost, topVote, rankB, rankC, 'rankA': rank});
     })
     .catch((err)=>{
         console.log(err);
@@ -67,6 +71,8 @@ app.post('/userlogin', (req, res) => {
     .then((dataTemp) => {
         topVote = dataTemp['data'][0];
         rankC = dataTemp['rank'];
+        topPost = dataTemp.data2['0'];
+        rankB = dataTemp.rank2;
     })
     .then(() => prismaModel.listPrismasAndRank(req.body['username']))
     .then((dataTemp) => {
@@ -75,7 +81,7 @@ app.post('/userlogin', (req, res) => {
         data = issueData;
         rank = dataTemp.rank;
         console.log(rank, rankC);
-        res.render('home', {data, 'user':userData, topPrisma, topVote, rankC, 'rankA': rank});
+        res.render('home', {data, 'user':userData, topPrisma, topPost, topVote, rankB, rankC, 'rankA': rank});
     })
     .catch((err)=>{
         console.log(err);
@@ -85,9 +91,10 @@ app.post('/userlogin', (req, res) => {
 app.get('/leaderboard', (req, res) => {
     var voteData;
     issueModel.listVotes()
-    .then((data) => {
+    .then(([data, data2]) => {
         console.log(data);
         voteData = data;
+        postData = data2;
      // res.render('leaderboard', {data})
     })
     .then(() => prismaModel.listPrismas())
@@ -95,7 +102,7 @@ app.get('/leaderboard', (req, res) => {
         console.log(prismaData)
         console.log("now here is the vote data")
         console.log(voteData)
-        res.render('leaderboard', {prismaData, voteData })
+        res.render('leaderboard', {prismaData, postData, voteData })
     })
 })
 

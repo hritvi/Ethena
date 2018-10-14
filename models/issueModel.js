@@ -57,8 +57,11 @@ issueModel.addIssue = async function(body, userid, addressedUser, user) {
             .at(contract.address);
             issueCount = Number(contractInstance.getIssueCount.call());
             issuesList = []
+            userVotes = {}
             for(i=0; i<issueCount; i++){
                 issuesList[i] = {'username': String(contractInstance.getUser.call(i)), 'votes': contractInstance.totalVotesFor.call(i) }
+                userVotes[issuesList[i].username] = userVotes[issuesList[i].username] == undefined? 1: userVotes[issuesList[i].username]+1;
+                console.log("user and his votes " , issuesList[i].username,  userVotes[issuesList[i].username])
             }
             issuesList.sort((a,b) => (a.votes > b.votes) ? -1 : ((b.votes > a.votes) ? -1 : 0)); 
             rank = issueCount;
@@ -67,9 +70,21 @@ issueModel.addIssue = async function(body, userid, addressedUser, user) {
                     rank = i+1;
                     break;
                 }
-            }    
+            }
+            sortable = []
+            for(var key in userVotes){
+                sortable.push({'username':key, 'posts':userVotes[key]})
+            }
+            sortable.sort((a,b) => (a.posts > b.posts) ? -1 : ((b.posts > a.posts) ? -1 : 0));
+            rank2 = issueCount;
+            for(i=0;i<issueCount;i++){
+                if(String(issuesList[i].username) == String(username)){
+                    rank2 = i+1;
+                    break;
+                }
+            }
             console.log("the issue list being passed " + issuesList + " its first element "+ issuesList[0])
-            resolve({'data':issuesList, rank});
+            resolve({'data':issuesList, rank, rank2, 'data2': sortable});
         })
     }
     
@@ -81,15 +96,22 @@ issueModel.addIssue = async function(body, userid, addressedUser, user) {
             .at(contract.address);
             issueCount = Number(contractInstance.getIssueCount.call());
             issuesList = []
+            userVotes = {}
             for(i=0; i<issueCount; i++){
                 issuesList[i] = {'username': String(contractInstance.getUser.call(i)), 'votes': contractInstance.totalVotesFor.call(i) }
+                userVotes[issuesList[i].username] = userVotes[issuesList[i].username] == undefined? 1: userVotes[issuesList[i].username]+1;
+                console.log("user and his votes " , issuesList[i].username,  userVotes[issuesList[i].username])
             }
             issuesList.sort((a,b) => (a.votes > b.votes) ? -1 : ((b.votes > a.votes) ? -1 : 0)); 
-            console.log("yeh toh yahan aa gaya");
-            resolve(issuesList);
+            sortable = []
+            for(var key in userVotes){
+                sortable.push({'username':key, 'posts':userVotes[key]})
+            }
+            sortable.sort((a,b) => (a.posts > b.posts) ? -1 : ((b.posts > a.posts) ? -1 : 0));
+            resolve([issuesList, sortable]);
         })
     }
-
+    
     issueModel.update = (id, status, department) => {
     }
     
