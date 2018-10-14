@@ -7,7 +7,7 @@ contract Prisma {
 
   mapping (int => uint8) public votesReceived;
   mapping (int => bytes32) public user;
-  int maxIndex = 0;
+  int maxIndex = 2;
   /* Solidity doesn't let you pass in an array of strings in the constructor (yet).
   We will use an array of bytes32 instead to store the list of candidates
   */
@@ -20,6 +20,9 @@ contract Prisma {
   */
   function Prisma(bytes32[] candidateNames)  public {
     candidateList = candidateNames;
+    user[0] = bytes32("tony");
+    user[1] = bytes32("hritvi");
+    user[2] = bytes32("bhartiya");
   }
 
   // This function returns the total votes a candidate has received so far
@@ -41,11 +44,7 @@ contract Prisma {
     return maxIndex;
   }
 
-  function addIssue(bytes32 candidate)  public {
-    candidateList.push(candidate);
-  }
-
-function bytes32ToString(bytes32 x) view returns (string) {
+  function bytes32ToString(bytes32 x) constant returns (string) {
       bytes memory bytesString = new bytes(32);
       uint charCount = 0;
       for (uint j = 0; j < 32; j++) {
@@ -61,9 +60,12 @@ function bytes32ToString(bytes32 x) view returns (string) {
       }
       return string(bytesStringTrimmed);
   }
-  
-  function getUser(int id) returns (string) {
-    return bytes32ToString(user[id]);
+
+  function addIssue(bytes32 candidate)  public {
+    candidateList.push(candidate);
   }
 
+   function getUser(int id) returns (string) {
+    return bytes32ToString(user[id]);
+  }
 }

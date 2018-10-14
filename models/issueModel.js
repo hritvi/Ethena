@@ -21,8 +21,7 @@ issueModel.addIssue = async function(body, userid, addressedUser, user) {
         from: web3.eth.accounts[0] 
     })
     console.log("Issue added")
-    issueCount = contractInstance.getIssueCount.call();
-    issueCount = issueCount['c'][0];
+    issueCount = Number(contractInstance.getIssueCount.call());
     issuesList = []
     for(i=0;i<issueCount;i++){
         userId = contractInstance.getUserId.call(i)
@@ -38,8 +37,7 @@ issueModel.addIssue = async function(body, userid, addressedUser, user) {
         contractInstance = web3.eth
         .contract(JSON.parse(contract.abi))
         .at(contract.address);
-        issueCount = contractInstance.getIssueCount.call();
-        issueCount = issueCount['c'][0];
+        issueCount = Number(contractInstance.getIssueCount.call());
         issuesList = []
         for(i=0;i<issueCount;i++){
             userId = contractInstance.getUserId.call(i)
@@ -57,12 +55,12 @@ issueModel.listVotes = () => {
         contractInstance = web3.eth
         .contract(JSON.parse(contract.abi))
         .at(contract.address);
-        issueCount = contractInstance.getIssueCount.call();
-        issueCount = issueCount['c'][0];
+        issueCount = Number(contractInstance.getIssueCount.call());
         issuesList = []
-        for(i=0;i<issueCount;i++){
-            issuesList[i] = Number(contractInstance.totalVotesFor.call(i).toString());
+        for(i=0; i<issueCount; i++){
+            issuesList[i] = {'username': String(contractInstance.getUser.call(i)), 'votes': contractInstance.totalVotesFor.call(i) }
         }
+        issuesList.sort((a,b) => (a.votes > b.votes) ? -1 : ((b.votes > a.votes) ? -1 : 0)); 
         resolve(issuesList);
     })
 }

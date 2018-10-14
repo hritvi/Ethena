@@ -23,13 +23,17 @@ prismaModel.listPrismas = () => {
         .at(contract.address);
         prismaCount = contractInstance.getPrismaCount.call();
         prismaList = []
-        for(i=0;i<prismaCount;i++){
+        for(i=0;i<=prismaCount;i++){
             username = contractInstance.getUser.call(i);
-            votes = Number(contractInstance.getPrisma.call(i));
+            console.log(username);
+            prisma = Number(contractInstance.getPrisma.call(i));
             if(username != undefined)
-                prismaList.push({votes , username});
+                prismaList.push({prisma , username});
         }
-        prismaList.sort((a,b) => (a.votes > b.votes) ? -1 : ((b.votes > a.votes) ? -1 : 0)); 
+        if(prismaList.length == 0){
+            prismaList.push({username:'tony', prisma:'0'})
+        }
+        prismaList.sort((a,b) => (a.prisma > b.prisma) ? -1 : ((b.prisma > a.prisma) ? -1 : 0)); 
         resolve(prismaList);
     })
 }
