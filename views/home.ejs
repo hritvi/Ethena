@@ -34,7 +34,7 @@
 
 		<header class="topnav">
 		  <a href="#" class="navbar-company-name">
-		    AppName
+		    Athena
 		  </a>
 		  <a href="/" class="navbar-right-navigation">
 		    LogOut
@@ -52,7 +52,7 @@
 										<div class="user-profile">
 											<div class="username-dt">
 												<div class="usr-pic">
-													<img src="images/resources/user-pic.png" alt="">
+													<i class="fa fa-users fa-3" style="color: white; font-size: 2.5em; vertical-align: center	"></i>
 												</div>
 											</div><!--username-dt end-->
 											<div class="user-specs">
@@ -64,6 +64,18 @@
 												<h4>Prisma</h4>
 												<span id="prismaCount"><img src="images/diamond.jpeg" height="36px" width="36px" class="diamond"><%= user.prisma %></span>
 											</li>
+											<li>
+												<h4>Prismatic Possessor</h4>
+												<span>@<%= user.prisma %></span>
+											</li>
+											<li>
+												<h4>Tantalizing TouchStone</h4>
+												<span>@<%= user.prisma %></span>
+											</li>
+											<li>
+												<h4>Ardent Achiever</h4>
+												<span>@<%= user.prisma %></span>
+											</li>
 										</ul>
 									</div><!--user-data end-->
 								</div><!--main-left-sidebar end-->
@@ -71,9 +83,6 @@
 							<div class="col-lg-6 col-md-8 no-pd">
 								<div class="main-ws-sec">
 									<div class="post-topbar">
-										<div class="user-picy">
-											<img src="images/resources/user-pic.png" alt="">
-										</div>
 										<div class="post-st">
 											<ul>
 												<li><a class="post_project active" href="#" title="">Add a achievement</a></li>
@@ -86,7 +95,6 @@
 										<div class="post-bar">
 											<div class="post_topbar">
 												<div class="usy-dt">
-													<img src="images/resources/us-pic.png" alt="">
 													<div class="usy-name">
 														<h3><%= data[i].user %>
 														<% if(data[i].user != data[i].addressedUser) { %>
@@ -116,7 +124,6 @@
 							<div class="col-lg-3 pd-right-none no-pd">
 								<div class="right-sidebar">
 									<div class="widget widget-about">
-										<img src="images/wd-logo.png" alt="">
 										<h3>Prismatic Possessor</h3>
 										<div class="sign_link">
 											<h3><a href="#" title=""><%= topPrisma.username %></a></h3>
