@@ -125,7 +125,7 @@ html {
     <li><a data-toggle="tab" href="#aa">Ardent Achiever</a></li>
   </ul>
 </div>
-<div class="wrapper">
+<div class="wrapper" id="pp">
   <div class="wrapper__header">
     <div class="b_logo"><img src="https://images.vexels.com/media/users/3/135313/isolated/lists/9c44517fa04da541c35888362bce2d1b-award-trophy-icon.png" width="40" alt=""/></div>
     <div class="b_caption">
@@ -136,40 +136,113 @@ html {
     <ul>
       <li>
         <div class="graphic"></div>
-        <div class="name"><span class="header">Jeff Bezoz</span><span class="stat">47.5</span><span class="sub">B</span></div>
+        <div class="name"><span class="header"><%= voteData[0].username %></span><span class="stat"><%= voteData[0].votes %></span><span class="sub">B</span></div>
       </li>
       <li>
         <div class="graphic"><img src="https://www.biography.com/.image/t_share/MTE4MDAzNDEwNzg5ODI4MTEw/barack-obama-12782369-1-402.jpg" alt=""/></div>
-        <div class="name"><span class="header">Barack Obama</span><span class="stat">43.5</span><span class="sub">B</span></div>
+        <div class="name"><span class="header"><%= voteData[1].username %></span><span class="stat"><%= voteData[1].votes %></span><span class="sub">B</span></div>
       </li>
       <li>
         <div class="graphic"></div>
-        <div class="name"><span class="header">Bill Gates</span><span class="stat">40.5</span><span class="sub">B</span></div>
+        <div class="name"><span class="header"><%= voteData[2].username %></span><span class="stat"><%= voteData[2].votes %></span><span class="sub">B</span></div>
       </li>
       <li>
         <div class="graphic"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b3/Sundar_Pichai_%28cropped%29.jpg/220px-Sundar_Pichai_%28cropped%29.jpg" alt=""/></div>
-        <div class="name"><span class="header">Sundar Pichai</span><span class="stat">38.2</span><span class="sub">B</span></div>
+        <div class="name"><span class="header">Sundar Pichai</span><span class="stat">sample</span><span class="sub">B</span></div>
       </li>
       <li>
         <div class="graphic"></div>
-        <div class="name"><span class="header">Mark Zukerberg</span><span class="stat">37.5</span><span class="sub">B</span></div>
+        <div class="name"><span class="header">Mark Zukerberg</span><span class="stat">sample</span><span class="sub">B</span></div>
       </li>
     </ul>
   </div>
 </div>
 
 
-<!-- 
+
+<div class="wrapper" id="tt">
+  <div class="wrapper__header">
+    <div class="b_logo"><img src="https://images.vexels.com/media/users/3/135313/isolated/lists/9c44517fa04da541c35888362bce2d1b-award-trophy-icon.png" width="40" alt=""/></div>
+    <div class="b_caption">
+      <p>Tantalising Touchstone</p>
+    </div>
+  </div>
+  <div class="wrapper__content">
+    <ul>
+      <li>
+        <div class="graphic"></div>
+        <div class="name"><span class="header"><%= voteData[0].username %></span><span class="stat"><%= voteData[0].votes %></span><span class="sub">B</span></div>
+      </li>
+      <li>
+        <div class="graphic"><img src="https://www.biography.com/.image/t_share/MTE4MDAzNDEwNzg5ODI4MTEw/barack-obama-12782369-1-402.jpg" alt=""/></div>
+        <div class="name"><span class="header"><%= voteData[1].username %></span><span class="stat"><%= voteData[1].votes %></span><span class="sub">B</span></div>
+      </li>
+      <li>
+        <div class="graphic"></div>
+        <div class="name"><span class="header"><%= voteData[2].username %></span><span class="stat"><%= voteData[2].votes %></span><span class="sub">B</span></div>
+      </li>
+      <li>
+        <div class="graphic"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b3/Sundar_Pichai_%28cropped%29.jpg/220px-Sundar_Pichai_%28cropped%29.jpg" alt=""/></div>
+        <div class="name"><span class="header">Sundar Pichai</span><span class="stat">sample</span><span class="sub">B</span></div>
+      </li>
+      <li>
+        <div class="graphic"></div>
+        <div class="name"><span class="header">Mark Zukerberg</span><span class="stat">sample</span><span class="sub">B</span></div>
+      </li>
+    </ul>
+  </div>
+</div>
+
+
+
+<div class="wrapper" id="aa">
+  <div class="wrapper__header">
+    <div class="b_logo"><img src="https://images.vexels.com/media/users/3/135313/isolated/lists/9c44517fa04da541c35888362bce2d1b-award-trophy-icon.png" width="40" alt=""/></div>
+    <div class="b_caption">
+      <p>Ardent Acheiver</p>
+    </div>
+  </div>
+  <div class="wrapper__content">
+    <ul>
+      <li>
+        <div class="graphic"></div>
+        <div class="name"><span class="header"><%= prismaData[0].username %></span><span class="stat"><%= prismaData[0].prisma %></span><span class="sub">B</span></div>
+      </li>
+      <li>
+        <div class="graphic"><img src="https://www.biography.com/.image/t_share/MTE4MDAzNDEwNzg5ODI4MTEw/barack-obama-12782369-1-402.jpg" alt=""/></div>
+        <div class="name"><span class="header"><%= prismaData[1].username %></span><span class="stat"><%= prismaData[1].prisma %></span><span class="sub">B</span></div>
+      </li>
+      <li>
+        <div class="graphic"></div>
+        <div class="name"><span class="header"><%= prismaData[2].username %></span><span class="stat"><%= prismaData[2].prisma %></span><span class="sub">B</span></div>
+      </li>
+      <li>
+        <div class="graphic"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b3/Sundar_Pichai_%28cropped%29.jpg/220px-Sundar_Pichai_%28cropped%29.jpg" alt=""/></div>
+        <div class="name"><span class="header">Sundar Pichai</span><span class="stat">sample</span><span class="sub">B</span></div>
+      </li>
+      <li>
+        <div class="graphic"></div>
+        <div class="name"><span class="header">Mark Zukerberg</span><span class="stat">sample</span><span class="sub">B</span></div>
+      </li>
+    </ul>
+  </div>
+</div>
+
+
+
 
 <div><h1>Top posters:</h1>
-		<% for (var i=0;i< data.length;i++){ %>
-		<p  id = '<%= "issue-" + i %>'><%= data[i] %></p>
+		<% for (var i=0;i< voteData.length;i++){ %>
+		<p  id = '<%= "issue-" + i %>'><%= voteData[i].username %></p><p><%= voteData[i].votes %></p>
 		<% } %>
 		</div>
 		<div><h1>Top prismatic users:</h1>
-		<% for (var i=0;i< voteData.length;i++){ %>
-		<p  id = '<%= "issue-" + i %>'><%= voteData[i] %></p>
+		<% for (var i=0;i< prismaData.length;i++){ %>
+		<p  id = '<%= "issue-" + i %>'><%= prismaData[i].username %></p><p><%= prismaData[i].prisma %></p>
 		<% } %>
 		</div>
 
- -->
+
+  </body>
+  </html>
+

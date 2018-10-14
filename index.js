@@ -51,17 +51,15 @@ app.get('/leaderboard', (req, res) => {
     issueModel.listVotes()
     .then((data) => {
         console.log(data);
-        data.sort();
         voteData = data;
      // res.render('leaderboard', {data})
     })
     .then(() => prismaModel.listPrismas())
-    .then((data) => {
-        console.log(data)
+    .then((prismaData) => {
+        console.log(prismaData)
         console.log("now here is the vote data")
         console.log(voteData)
-        data.sort();
-        res.render('leaderboard', {data, voteData })
+        res.render('leaderboard', {prismaData, voteData })
     })
 })
 
