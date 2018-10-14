@@ -43,7 +43,7 @@ var contractInstance;
 //The final parameter is a callback function. After the contract is deployed this function will be called with either an error or our contract instance
 
 var deployedContract = VotingContract.new(
-  ["Elevator doesnot work", "Poor work environment", "Dark and clumsy corridors"],
+  [],
   {
     data: byteCode,
     from: web3.eth.accounts[0],
@@ -71,24 +71,6 @@ var deployedContract = VotingContract.new(
         console.log(contract.address);
         //get the instance of the contract at this address
         contractInstance = VotingContract.at(contract.address);
-        //execute contract functions on the blockchain
-        console.log(
-          "\n------------ LOGGING Executing contract calls -------------\n"
-        );
-        console.log("Votes for Elevator doesnot work before: ");
-        //getPrisma() is a function in our contract
-        console.log(contractInstance.getPrisma.call(0).valueOf());
-
-        //execute a transaction. The transaction id (output) is the proof that this transaction occurred and you can refer back to this at any time in the future. This transaction is immutable.
-        console.log(
-          contractInstance.voteForCandidate(0,1, {
-            from: web3.eth.accounts[0]
-          })
-        );
-
-        //votes for Elevator doesnot work should go up by 1
-        console.log("Votes for Elevator doesnot work after: ");
-        console.log(contractInstance.getPrisma.call(0).valueOf());
         //write the contract address and abi to file for client side JS to use to interact with contract
         fs.writeFile(
           "./public/balanceContract.json",

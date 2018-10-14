@@ -7,7 +7,7 @@ contract Prisma {
 
   mapping (int => uint8) public votesReceived;
   mapping (int => bytes32) public user;
-
+  int maxIndex = 4;
   /* Solidity doesn't let you pass in an array of strings in the constructor (yet).
   We will use an array of bytes32 instead to store the list of candidates
   */
@@ -18,30 +18,32 @@ contract Prisma {
   deploy the contract to the blockchain. When we deploy the contract,
   we will pass an array of candidates who will be contesting in the election
   */
-  function Prisma(bytes32[] candidateNames) {
+  function Prisma(bytes32[] candidateNames)  public {
     candidateList = candidateNames;
+    user[0] = bytes32("tony");
+    user[1] = bytes32("hritvi");
+    user[2] = bytes32("bhartiya");
+    user[3] = bytes32("supra");
+    user[4] = bytes32("palak");
   }
 
   // This function returns the total votes a candidate has received so far
   function getPrisma(int id) returns (uint8) {
-    assert(int256(candidateList.length) > id);
     return votesReceived[id];
   }
 
   // This function increments the vote count for the specified candidate. This
   // is equivalent to casting a vote
-  function voteForCandidate(int id, uint8 scoreCount) {
-    assert(int256(candidateList.length) > id);
+  function voteForCandidate(int id, uint8 scoreCount, bytes32 username)  public {
     votesReceived[id] += scoreCount;
+    user[id] = username;
+    if(id > maxIndex){
+      maxIndex = id;
+    }
   }
 
-  function validCandidate(bytes32 candidate) returns (bool) {
-    for(uint i = 0; i < candidateList.length; i++) {
-      if (candidateList[i] == candidate) {
-        return true;
-      }
-    }
-    return false;
+  function getPrismaCount() returns (int) {
+    return maxIndex;
   }
 
   function bytes32ToString(bytes32 x) constant returns (string) {
@@ -61,11 +63,7 @@ contract Prisma {
       return string(bytesStringTrimmed);
   }
 
-  function getPrismaCount() returns (uint256) {
-    return candidateList.length;
-  }
-
-  function addIssue(bytes32 candidate) {
+  function addIssue(bytes32 candidate)  public {
     candidateList.push(candidate);
   }
 

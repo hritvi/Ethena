@@ -23,17 +23,25 @@ contract Voting {
   function Voting(bytes32[] candidateNames)  public {
     candidateList = candidateNames;
     userId[0] = 0;
-    userId[1] = 0;
+    userId[1] = 3;
     userId[2] = 1;
+    userId[3] = 4;
+    userId[4] = 2;
     addressedUserId[0] = 0;
-    addressedUserId[1] = 2;
+    addressedUserId[1] = 1;
     addressedUserId[2] = 0;
+    addressedUserId[3] = 2;
+    addressedUserId[4] = 4;
     addressedUser[0] = bytes32("tony");
-    addressedUser[1] = bytes32("bhartiya");
+    addressedUser[1] = bytes32("hritvi");
     addressedUser[2] = bytes32("tony");
+    addressedUser[3] = bytes32("bhartiya");
+    addressedUser[4] = bytes32("palak");
     user[0] = bytes32("tony");
-    user[1] = bytes32("tony");
+    user[1] = bytes32("supra");
     user[2] = bytes32("hritvi");
+    user[3] = bytes32("palak");
+    user[4] = bytes32("bhartiya");
   }
 
   // This function returns the total votes a candidate has received so far
