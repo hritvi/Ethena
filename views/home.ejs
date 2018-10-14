@@ -18,7 +18,74 @@
 <link rel="stylesheet" type="text/css" href="css/style.css">
 <link rel="stylesheet" type="text/css" href="css/responsive.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<style></style>
+<style>
+	.diamond {
+		margin-left: 3rem;
+		margin-top: -0.4rem;
+	}
+
+	button {
+	  position: absolute;
+	  top: 0;
+	  left: 0;
+	  right: 0;
+	  bottom: 0;
+	  margin: auto;
+	  width: 90px;
+	  height: 40px;
+	  background: #FFFFFF;
+	  border: 0;
+	  font-size: .9rem;
+	  font-family: Futura;
+	  transition: all .2s ease-in-out;
+	  cursor: pointer;
+	  border-radius: 6px;
+	  box-shadow: 0px 2px 0px rgba(0, 0, 0, 0.1);
+	  outline: none;
+	}
+	button:hover {
+	  color: #84d9ff;
+	  -webkit-transform: scale(1.2);
+	          transform: scale(1.2);
+	}
+	button:hover span {
+	  opacity: 1;
+	  transition: all .2s ease-in-out;
+	}
+	button:active {
+	  -webkit-transform: scale(1.4);
+	          transform: scale(1.4);
+	}
+	button span {
+	  position: absolute;
+	  top: -55px;
+	  left: 0;
+	  right: 0;
+	  margin: auto;
+	  background: #84d9ff;
+	  color: rgba(0, 0, 0, 0.5);
+	  padding: 10px 0;
+	  border-radius: 100px;
+	  opacity: 0;
+	  transition: all .2s ease-in-out;
+	}
+	button span:hover {
+	  opacity: 1;
+	}
+	button span:after {
+	  position: absolute;
+	  bottom: -7px;
+	  left: 0;
+	  right: 0;
+	  margin: auto;
+	  content: "";
+	  width: 0;
+	  height: 0;
+	  border-left: 8px solid transparent;
+	  border-right: 8px solid transparent;
+	  border-top: 8px solid #84d9ff;
+	}
+</style>
 </head>
 
 
@@ -57,7 +124,7 @@
 										<ul class="user-fw-status">
 											<li>
 												<h4>Prisma</h4>
-												<span id="prismaCount"><%= user.prisma %></span>
+												<span id="prismaCount"><img src="images/diamond.jpeg" height="36px" width="36px" class="diamond"><%= user.prisma %></span>
 											</li>
 										</ul>
 									</div><!--user-data end-->
@@ -96,15 +163,11 @@
 											<div class="job-status-bar">
 												<ul class="like-com">
 													<li>
-														<button class="clap" id = '<%= "upvote-" + i %>' onclick="voteForCandidate(this.id)"><span>
-														    <!--  SVG Created by Luis Durazo from the Noun Project  -->
-														    <svg id="clap--icon" xmlns="http://www.w3.org/2000/svg" viewBox="-549 338 100.1 125">
-														  <path d="M-471.2 366.8c1.2 1.1 1.9 2.6 2.3 4.1.4-.3.8-.5 1.2-.7 1-1.9.7-4.3-1-5.9-2-1.9-5.2-1.9-7.2.1l-.2.2c1.8.1 3.6.9 4.9 2.2zm-28.8 14c.4.9.7 1.9.8 3.1l16.5-16.9c.6-.6 1.4-1.1 2.1-1.5 1-1.9.7-4.4-.9-6-2-1.9-5.2-1.9-7.2.1l-15.5 15.9c2.3 2.2 3.1 3 4.2 5.3zm-38.9 39.7c-.1-8.9 3.2-17.2 9.4-23.6l18.6-19c.7-2 .5-4.1-.1-5.3-.8-1.8-1.3-2.3-3.6-4.5l-20.9 21.4c-10.6 10.8-11.2 27.6-2.3 39.3-.6-2.6-1-5.4-1.1-8.3z"/>
-														  <path d="M-527.2 399.1l20.9-21.4c2.2 2.2 2.7 2.6 3.5 4.5.8 1.8 1 5.4-1.6 8l-11.8 12.2c-.5.5-.4 1.2 0 1.7.5.5 1.2.5 1.7 0l34-35c1.9-2 5.2-2.1 7.2-.1 2 1.9 2 5.2.1 7.2l-24.7 25.3c-.5.5-.4 1.2 0 1.7.5.5 1.2.5 1.7 0l28.5-29.3c2-2 5.2-2 7.1-.1 2 1.9 2 5.1.1 7.1l-28.5 29.3c-.5.5-.4 1.2 0 1.7.5.5 1.2.4 1.7 0l24.7-25.3c1.9-2 5.1-2.1 7.1-.1 2 1.9 2 5.2.1 7.2l-24.7 25.3c-.5.5-.4 1.2 0 1.7.5.5 1.2.5 1.7 0l14.6-15c2-2 5.2-2 7.2-.1 2 2 2.1 5.2.1 7.2l-27.6 28.4c-11.6 11.9-30.6 12.2-42.5.6-12-11.7-12.2-30.8-.6-42.7m18.1-48.4l-.7 4.9-2.2-4.4m7.6.9l-3.7 3.4 1.2-4.8m5.5 4.7l-4.8 1.6 3.1-3.9"/>
-														</svg>
-														  </span>
-														  <span id="clap--count" class="clap--count"></span>
-														  <span id='<%= "votes-" + i %>' class="clap--count-total"></span></button>
+														<button type='button' id = '<%= "upvote-" + i %>' onclick="voteForCandidate(this.id)">
+														  <i class='fa fa-thumbs-up'></i>
+														  Like
+														  <span>0</span>
+														</button>
 													</li> 
 												</ul>
 											</div>
@@ -222,3 +285,4 @@ crossorigin="anonymous"></script>
 <script>'undefined'=== typeof _trfq || (window._trfq = []);'undefined'=== typeof _trfd && (window._trfd=[]),_trfd.push({'tccl.baseHost':'secureserver.net'}),_trfd.push({'ap':'cpsh'},{'server':'a2plcpnl0235'}) // Monitoring performance to make your website faster. If you want to opt-out, please contact web hosting support.</script><script src='https://img1.wsimg.com/tcc/tcc_l.combined.1.0.6.min.js'>	
 </script>
 </html>
+id = '<%= "upvote-" + i %>' onclick="voteForCandidate(this.id)"

@@ -38,11 +38,11 @@ userModel.insert = (body, res) => {
             'Content-Type': 'application/json',
             'Accept': 'application/json',
         },
-        body: JSON.stringify({query: 'mutation {insert_user(objects: [{name:"'+ body['name']+ '",password:"'+ body['password'] +'",email:"'+body['email']+'",username:"'+body['username'] +'" ,phone:"'+body['phone'] +'"} ]) {returning{id}}}'})
+        body: JSON.stringify({query: 'mutation {insert_user(objects: [{name:"'+ body['name']+ '",password:"'+ body['password'] +'",email:"'+body['email'] +'",username:"'+body['name'] +'"} ]) {returning{id}}}'})
     })
     .then(r => {
         return r.json()})
-        .then(data => {
+    .then(data => {
             resolve(data);
         });
     });
