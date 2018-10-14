@@ -1,10 +1,11 @@
 <html>
 	<head>
 		<title>
-			User Login
+			Register
 		</title>
 		<style>
 
+		@import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300);
 		@import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300);
 		*{
 			box-sizing: border-box;
@@ -25,8 +26,8 @@
 			top: 50%;
 			left: 0;
 			width: 100%;
-			height: 800px;
-			margin-top: -200px;
+			height: 450px;
+			margin-top: -225px;
 			overflow: hidden;
 			
 			&.form-success{
@@ -41,7 +42,7 @@
 			max-width: 600px;
 			margin: 0 auto;
 			padding: 80px 0;
-			height: 400px;
+			height: 500px;
 			text-align: center;
 			
 			h1{
@@ -51,11 +52,14 @@
 			}
 		}
 		form{
-			padding: 20px 0;
+			padding: 20px 0 7px 0;
 			position: relative;
 			z-index: 2;
 		}
-		input{
+		a{
+			text-decoration: none;
+		}
+		input, button{
 			display: block;
 			appearance: none;
 			outline: 0;
@@ -81,23 +85,6 @@
 				color:#53e3a6;
 			}
 		}
-
-		button{
-			appearance: none;
-			outline: 0;
-			background-color: white;
-			border: 0;
-			padding: 10px 15px;
-			width: 250px;
-			cursor: pointer;
-			font-size: 18px;
-			transition-duration: 0.25s;
-			
-			&:hover{
-				background-color: rgb(245, 247, 249);
-			}
-		}
-
 		</style>
 	</head>
 	<body>
@@ -109,13 +96,11 @@
 				<form method="POST" action="register" class="form">
 				   <input type="text" name="name" placeholder="Name" height=300px>
 				    <input type="password" name="password" placeholder="Password">
+				    <input type="password" name="pswd" placeholder="Confirm Password">
 				    <input type="text" name="email" placeholder="Email">
-				    <input type="text" name="username" placeholder="Username">
-				    <input type="number" name="phone" placeholder="Phone no">
-				    <input type="submit" value="submit" id="login-button">
+				    <input type="submit" value="Register" id="login-button">
 				    <!-- <button>Go to complaint Portal</button> -->
-				</form>
-				<a href="/"><button>Go to complaint Portal</button></a>		
+				</form>	
 			</div>
 		</div>
 		<script>

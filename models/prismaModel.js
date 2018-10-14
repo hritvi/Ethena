@@ -27,7 +27,11 @@ prismaModel.listPrismas = () => {
         for(i=0;i<prismaCount;i++){
             prismaList[i] = Number(contractInstance.getPrisma.call(i).toString());
         }
-        resolve(issuesList);
+        prismaList.sort();
+        for(i=0;i<prismaCount;i++){
+            prismaList[i] = {'username': contractInstance.getUser.call(i).toString(), 'prisma': prismaList[i]}
+        }
+        resolve(prismaList);
     })
 }
 

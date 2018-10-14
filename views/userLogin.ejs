@@ -3,8 +3,7 @@
 		<title>
 			User Login
 		</title>
-		<style>
-
+		<style type="text/css">
 		@import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300);
 		*{
 			box-sizing: border-box;
@@ -51,11 +50,14 @@
 			}
 		}
 		form{
-			padding: 20px 0;
+			padding: 20px 0 7px 0;
 			position: relative;
 			z-index: 2;
 		}
-		input{
+		a{
+			text-decoration: none;
+		}
+		input, button{
 			display: block;
 			appearance: none;
 			outline: 0;
@@ -81,23 +83,6 @@
 				color:#53e3a6;
 			}
 		}
-
-		button{
-			appearance: none;
-			outline: 0;
-			background-color: white;
-			border: 0;
-			padding: 10px 15px;
-			width: 250px;
-			cursor: pointer;
-			font-size: 18px;
-			transition-duration: 0.25s;
-			
-			&:hover{
-				background-color: rgb(245, 247, 249);
-			}
-		}
-
 		</style>
 	</head>
 	<body>
@@ -109,10 +94,8 @@
 				<form method="POST" action="userlogin" class="form">
 				   <input type="text" name="username" placeholder="Username" height=300px>
 				   <input type="password" name="password" placeholder="Password">
-				    <input type="submit" value="submit" id="login-button">
-				    <!-- <button>Go to complaint Portal</button> -->
+				    <input type="submit" value="LogIn" id="login-button">
 				</form>
-				<a href="/"><button>Go to complaint Portal</button></a>
 				<a href="/register"><button>Register Yourself</button></a>				
 			</div>
 		</div>
