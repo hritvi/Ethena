@@ -30,7 +30,7 @@ prismaModel.listPrismasAndRank = (currentUser) => {
             if(username != undefined)
                 prismaList.push({prisma , username});
         }
-        prismaList.sort((a,b) => (a.prisma > b.prisma) ? -1 : ((b.prisma > a.prisma) ? -1 : 0));
+        prismaList.sort((a,b) => (a.prisma > b.prisma) ? -1 : ((b.prisma > a.prisma) ? 1 : 0));
         rank = prismaCount+1;
         for(i=0;i<=prismaCount;i++){
             if(String(prismaList[i].username) == String(currentUser)){
