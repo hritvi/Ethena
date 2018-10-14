@@ -63,7 +63,7 @@ issueModel.addIssue = async function(body, userid, addressedUser, user) {
                 userVotes[issuesList[i].username] = userVotes[issuesList[i].username] == undefined? 1: userVotes[issuesList[i].username]+1;
                 console.log("user and his votes " , issuesList[i].username,  userVotes[issuesList[i].username])
             }
-            issuesList.sort((a,b) => (a.votes > b.votes) ? -1 : ((b.votes > a.votes) ? -1 : 0)); 
+            issuesList.sort((a,b) => (a.votes > b.votes) ? -1 : ((b.votes > a.votes) ? 1 : 0)); 
             rank = issueCount;
             for(i=0;i<issueCount;i++){
                 if(String(issuesList[i].username) == String(username)){
@@ -75,7 +75,7 @@ issueModel.addIssue = async function(body, userid, addressedUser, user) {
             for(var key in userVotes){
                 sortable.push({'username':key, 'posts':userVotes[key]})
             }
-            sortable.sort((a,b) => (a.posts > b.posts) ? -1 : ((b.posts > a.posts) ? -1 : 0));
+            sortable.sort((a,b) => (a.posts > b.posts) ? -1 : ((b.posts > a.posts) ? 1 : 0));
             rank2 = issueCount;
             for(i=0;i<issueCount;i++){
                 if(String(issuesList[i].username) == String(username)){
@@ -102,12 +102,12 @@ issueModel.addIssue = async function(body, userid, addressedUser, user) {
                 userVotes[issuesList[i].username] = userVotes[issuesList[i].username] == undefined? 1: userVotes[issuesList[i].username]+1;
                 console.log("user and his votes " , issuesList[i].username,  userVotes[issuesList[i].username])
             }
-            issuesList.sort((a,b) => (a.votes > b.votes) ? -1 : ((b.votes > a.votes) ? -1 : 0)); 
+            issuesList.sort((a,b) => (a.votes > b.votes) ? -1 : ((b.votes > a.votes) ? 1 : 0)); 
             sortable = []
             for(var key in userVotes){
                 sortable.push({'username':key, 'posts':userVotes[key]})
             }
-            sortable.sort((a,b) => (a.posts > b.posts) ? -1 : ((b.posts > a.posts) ? -1 : 0));
+            sortable.sort((a,b) => (a.posts > b.posts) ? -1 : ((b.posts > a.posts) ? 1 : 0));
             resolve([issuesList, sortable]);
         })
     }
