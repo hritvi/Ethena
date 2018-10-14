@@ -17,21 +17,24 @@ app.post('/submit',(req, res) => {
     var issueData;
     var topVote;
     var topPrisma;
+    var rankC;
     userData = {'id': req.body['userid'], 'name': req.body['username'], 'prisma': req.body['prisma']}
     issueModel.addIssue(req.body['issue'], req.body['userid'], req.body['handle'], req.body['username'])
     .then((data) => {
         issueData = data;
         // res.render{'home',{data, 'user':userData}}
     })
-    .then(() => issueModel.listVotes())
-    .then((data) => {
+    .then(() => issueModel.listVotesAndRank(req.body['username']))
+    .then(([data, rank]) => {
+        rankC = rank;
         topVote = data[0];
     })
-    .then(() => prismaModel.listPrismas())
-    .then((data) => {
+    .then(() => prismaModel.listPrismasAndRank(req.body['username']))
+    .then(([data, rank]) => {
+        console.log(data);
         topPrisma =  data[0];
         data = issueData;
-        res.render('home', {data, 'user':userData, topPrisma, topVote});
+        res.render('home', {data, 'user':userData, topPrisma, topVote, rankC, 'rankA':rank});
     })
     .catch((err)=>{
         console.log(err);
@@ -47,6 +50,7 @@ app.post('/userlogin', (req, res) => {
     var issueData;
     var topVote;
     var topPrisma;
+    var rankC;
     userModel.authenticate(req.body['username'], req.body['password'])
     .then((user) => {
         userData = user;
@@ -59,15 +63,19 @@ app.post('/userlogin', (req, res) => {
         issueData = data;
         // res.render('home',{data, 'user':userData});
     })
-    .then(() => issueModel.listVotes())
-    .then((data) => {
-        topVote = data[0];
+    .then(() => issueModel.listVotesAndRank(req.body['username']))
+    .then((dataTemp) => {
+        topVote = dataTemp['data'][0];
+        rankC = dataTemp['rank'];
     })
-    .then(() => prismaModel.listPrismas())
-    .then((data) => {
-        topPrisma =  data[0];
+    .then(() => prismaModel.listPrismasAndRank(req.body['username']))
+    .then((dataTemp) => {
+        topPrisma =  dataTemp.data[0];
+        console.log("prisma data received : "+ dataTemp.data);
         data = issueData;
-        res.render('home', {data, 'user':userData, topPrisma, topVote});
+        rank = dataTemp.rank;
+        console.log(rank, rankC);
+        res.render('home', {data, 'user':userData, topPrisma, topVote, rankC, 'rankA': rank});
     })
     .catch((err)=>{
         console.log(err);
