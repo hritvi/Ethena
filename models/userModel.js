@@ -20,7 +20,7 @@ userModel.authenticate = (username, password) => {
     .then(r => r.json())
     .then(data => {
         if(data['data']['user'][0]['id'] != undefined){
-            var user = {'id': data['data']['user'][0]['id'] , 'name': username}
+            var user = {'id': data['data']['user'][0]['id'] - 1 , 'name': username}
             resolve(user);
         }
         else{
@@ -69,14 +69,15 @@ userModel.getId = (username) => {
     })
     .then(r => r.json())
     .then(data => {
-        console.log(data['data']['user'][0]['id']);
-        resolve (data['data']['user'][0]['id']);
+        console.log(data['data']['user'][0]['id']-1);
+        resolve (data['data']['user'][0]['id']-1);
     })
   })
 }
 
 userModel.getUsername = (id) => {
     return new Promise((resolve, reject) => {
+        id++;
         fetch('https://hasuraa.herokuapp.com/v1alpha1/graphql', {
         method: 'POST',
         headers: {
