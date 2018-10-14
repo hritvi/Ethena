@@ -24,7 +24,25 @@ html {
   background: #f9f9f9;
   font-family: "Montserrat", sans-serif;
 }
-
+.wrap{
+    box-shadow: 0 0 4rem rgba(0,0,0,.3);
+    background: #e85c41;  
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    height: 500px;
+    margin-top: -250px;
+    overflow: hidden;
+    
+    &.form-success{
+      .container{
+        h1{
+          transform: translateY(85px);
+        }
+      }
+    }
+}
 .wrapper {
   max-width: 300px;
   position: relative;
@@ -126,18 +144,18 @@ html {
   color: white;
   font-weight: bold;
 }
-
+.nav{
+  width: 100%;
+}
 </style>
 </head>
 <body>
-
-<div class="container">
-  <ul class="nav nav-tabs">
-    <li class="active"><a data-toggle="tab" href="#pp" id="pp-button" class="selection-tab">Prismatic Processor</a></li>
-    <li><a data-toggle="tab" href="#tt" id="tt-button" class="selection-tab">Tantalizing TouchStone</a></li>
-    <li><a data-toggle="tab" href="#aa" id="aa-button" class="selection-tab">Ardent Achiever</a></li>
-  </ul>
-</div>
+<ul class="nav nav-tabs">
+  <li class="active"><a data-toggle="tab" href="#pp" id="pp-button" class="selection-tab">Prismatic Processor</a></li>
+  <li><a data-toggle="tab" href="#tt" id="tt-button" class="selection-tab">Tantalizing TouchStone</a></li>
+  <li><a data-toggle="tab" href="#aa" id="aa-button" class="selection-tab">Ardent Achiever</a></li>
+</ul>
+<div class="wrap">
 <div class="wrapper" id="pp">
   <div class="wrapper__header">
     <div class="b_logo"><img src="https://images.vexels.com/media/users/3/135313/isolated/lists/9c44517fa04da541c35888362bce2d1b-award-trophy-icon.png" width="40" alt=""/></div>
@@ -240,21 +258,7 @@ html {
     </ul>
   </div>
 </div>
-
-
-
-
-<div><h1>Top posters:</h1>
-		<% for (var i=0;i< voteData.length;i++){ %>
-		<p  id = '<%= "issue-" + i %>'><%= voteData[i].username %></p><p><%= voteData[i].votes %></p>
-		<% } %>
-		</div>
-		<div><h1>Top prismatic users:</h1>
-		<% for (var i=0;i< prismaData.length;i++){ %>
-		<p  id = '<%= "issue-" + i %>'><%= prismaData[i].username %></p><p><%= prismaData[i].prisma %></p>
-		<% } %>
-		</div>
-
+</div>
 
 <script>
   document.getElementById('pp-button').addEventListener('click', function() {
