@@ -29,11 +29,11 @@ contract Voting {
     addressedUserId[1] = 2;
     addressedUserId[2] = 0;
     addressedUser[0] = bytes32("tony");
-    addressedUser[1] = bytes32("tony");
+    addressedUser[1] = bytes32("bhartiya");
     addressedUser[2] = bytes32("tony");
-    user[0] = bytes32("");
-    user[1] = bytes32("");
-    user[2] = bytes32("");
+    user[0] = bytes32("tony");
+    user[1] = bytes32("tony");
+    user[2] = bytes32("hritvi");
   }
 
   // This function returns the total votes a candidate has received so far
