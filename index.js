@@ -113,7 +113,7 @@ app.get('/register', (req, res) => {
 app.post('/register', (req, res) => {
     userModel.insert(req.body, res)
     .then(() => {
-        res.send("You have been successfully registered");
+        res.send("You have been successfully registered <a href=" + "/" + ">Login Here</a>");
     })
 })
 
