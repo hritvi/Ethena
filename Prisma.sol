@@ -7,7 +7,7 @@ contract Prisma {
 
   mapping (int => uint8) public votesReceived;
   mapping (int => bytes32) public user;
-  int maxIndex = 2;
+  int maxIndex = 4;
   /* Solidity doesn't let you pass in an array of strings in the constructor (yet).
   We will use an array of bytes32 instead to store the list of candidates
   */
@@ -23,6 +23,7 @@ contract Prisma {
     user[0] = bytes32("tony");
     user[1] = bytes32("hritvi");
     user[2] = bytes32("bhartiya");
+    user[3] = bytes32("palak");
   }
 
   // This function returns the total votes a candidate has received so far
