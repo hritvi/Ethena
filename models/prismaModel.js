@@ -22,12 +22,15 @@ prismaModel.listPrismas = () => {
         .contract(JSON.parse(contract.abi))
         .at(contract.address);
         prismaCount = contractInstance.getPrismaCount.call();
-        prismaCount = prismaCount['c'][0];
         prismaList = []
         for(i=0;i<prismaCount;i++){
-            prismaList[i] = Number(contractInstance.getPrisma.call(i).toString());
+            username = contractInstance.getUser.call(i);
+            votes = Number(contractInstance.getPrisma.call(i));
+            if(username != undefined)
+                prismaList.push({votes , username});
         }
-        resolve(issuesList);
+        prismaList.sort((a,b) => (a.votes > b.votes) ? -1 : ((b.votes > a.votes) ? -1 : 0)); 
+        resolve(prismaList);
     })
 }
 

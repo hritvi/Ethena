@@ -34,10 +34,10 @@ window.onload = function() {
                         console.log('userId: '+ userId)
                         console.log('addressedUserId: '+ addressedUserId);
                         if(userId == addressedUserId){
-                            prismaHandler(Number(addressedUserId), 'same', currentUser);
+                            prismaHandler(Number(addressedUserId), 'same', addressedUser, currentUser);
                         }
                         else{
-                            prismaHandler(Number(addressedUserId), 'different', currentUser);
+                            prismaHandler(Number(addressedUserId), 'different',  addressedUser, currentUser);
                         }
                     }
                     $('#upvote-'+id).removeAttr("onclick")
