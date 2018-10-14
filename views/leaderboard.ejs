@@ -35,7 +35,7 @@ html {
 .wrapper .wrapper__header {
   border-top-left-radius: 4px;
   border-top-right-radius: 4px;
-  background: #3558db;
+  background: #e44d3a;
   padding: 27px 30px;
   display: flex;
   justify-content: space-between;
@@ -103,15 +103,28 @@ html {
   vertical-align: middle;
 }
 .wrapper .wrapper__content ul li .name span.stat {
-  color: #35d8ac;
+  color: #e44d3a;
   font-weight: 700;
   font-size: 25px;
 }
 .wrapper .wrapper__content ul li .name span.sub {
-  color: #35d8ac;
+  color: #e44d3a;
   font-weight: 700;
   font-size: 10px;
   vertical-align: sub;
+}
+
+.nav {
+  background: #e44d3a;
+}
+
+.nav-tabs {
+  background: #e44d3a;
+}
+
+.selection-tab {
+  color: white;
+  font-weight: bold;
 }
 
 </style>
@@ -120,9 +133,9 @@ html {
 
 <div class="container">
   <ul class="nav nav-tabs">
-    <li class="active"><a data-toggle="tab" href="#pp">Prismatic Processor</a></li>
-    <li><a data-toggle="tab" href="#tt">Tantalizing TouchStone</a></li>
-    <li><a data-toggle="tab" href="#aa">Ardent Achiever</a></li>
+    <li class="active"><a data-toggle="tab" href="#pp" id="pp-button" class="selection-tab">Prismatic Processor</a></li>
+    <li><a data-toggle="tab" href="#tt" id="tt-button" class="selection-tab">Tantalizing TouchStone</a></li>
+    <li><a data-toggle="tab" href="#aa" id="aa-button" class="selection-tab">Ardent Achiever</a></li>
   </ul>
 </div>
 <div class="wrapper" id="pp">
@@ -160,7 +173,7 @@ html {
 
 
 
-<div class="wrapper" id="tt">
+<div class="wrapper" id="tt" style="display:none;">
   <div class="wrapper__header">
     <div class="b_logo"><img src="https://images.vexels.com/media/users/3/135313/isolated/lists/9c44517fa04da541c35888362bce2d1b-award-trophy-icon.png" width="40" alt=""/></div>
     <div class="b_caption">
@@ -195,7 +208,7 @@ html {
 
 
 
-<div class="wrapper" id="aa">
+<div class="wrapper" id="aa" style="display:none;">
   <div class="wrapper__header">
     <div class="b_logo"><img src="https://images.vexels.com/media/users/3/135313/isolated/lists/9c44517fa04da541c35888362bce2d1b-award-trophy-icon.png" width="40" alt=""/></div>
     <div class="b_caption">
@@ -242,6 +255,24 @@ html {
 		<% } %>
 		</div>
 
+
+<script>
+  document.getElementById('pp-button').addEventListener('click', function() {
+    document.getElementById('pp').style.display = 'block';
+    document.getElementById('tt').style.display = 'none';
+    document.getElementById('aa').style.display = 'none';
+  })
+  document.getElementById('tt-button').addEventListener('click', function() {
+    document.getElementById('tt').style.display = 'block';
+    document.getElementById('pp').style.display = 'none';
+    document.getElementById('aa').style.display = 'none';
+  })
+  document.getElementById('aa-button').addEventListener('click', function() {
+    document.getElementById('aa').style.display = 'block';
+    document.getElementById('tt').style.display = 'none';
+    document.getElementById('pp').style.display = 'none';
+  })
+</script>
 
   </body>
   </html>
