@@ -10,7 +10,7 @@ const bodyParser = require('body-parser');
 app.use(bodyParser());
 app.set('view engine', 'ejs');
 app.get('/',(req, res) => {
-    res.render('register');
+    res.render('userLogin');
 });
 
 app.post('/submit',(req, res) => {
