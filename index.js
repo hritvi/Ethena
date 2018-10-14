@@ -56,7 +56,18 @@ app.post('/userlogin', (req, res) => {
     .then(() => issueModel.list())
     .then((data)=>{
         console.log(data)
-        res.render('home',{data, 'user':userData});
+        issueData = data;
+        // res.render('home',{data, 'user':userData});
+    })
+    .then(() => issueModel.listVotes())
+    .then((data) => {
+        topVote = data[0];
+    })
+    .then(() => prismaModel.listPrismas())
+    .then((data) => {
+        topPrisma =  data[0];
+        data = issueData;
+        res.render('home', {data, 'user':userData, topPrisma, topVote});
     })
     .catch((err)=>{
         console.log(err);
