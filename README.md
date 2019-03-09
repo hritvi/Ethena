@@ -5,12 +5,12 @@
 ## Set-Up Instructions
 
 1. You need to have an updated node version
-2. npm install -g etheriumjs-testrpc
+2. npm install -g ganache-cli
 3. cd to the project directory
 4. npm install
 5. run the testrpc server at the default port and 1234 on two different terminal instances
-- testrpc --port 1234
-- testrpc
+- ganache-cli --port 1234
+- ganache-cli
 6. now run - npm start
 
 ## Sample credentials
