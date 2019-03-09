@@ -1,4 +1,4 @@
-# Athena
+# Ethena
 
 ### Gamify Workspace with Incentive(cryptoTokens)-driven  decentralised-appraisal system
 
