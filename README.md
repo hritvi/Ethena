@@ -11,7 +11,7 @@
 5. run the testrpc server at the default port and 1234 on two different terminal instances
 - testrpc --port 1234
 - testrpc
-6. now run the npm start
+6. now run - npm start
 
 ## Sample credentials
 | Username | Password |
